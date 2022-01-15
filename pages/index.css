@@ -14,3 +14,9 @@
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/__type/button__type_edit.css);
 @import url(../blocks/button/__type/button__type_add.css);
+@import url(../blocks/button/__type/button__type_like.css);
+@import url(../blocks/elements/elements.css);
+@import url(../blocks/element/element.css);
+@import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__caption/element__caption.css);
+@import url(../blocks/element/__title/element__title.css);

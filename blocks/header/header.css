@@ -4,5 +4,4 @@
   width: calc(100% - 2*200px);
   padding-top: 45px;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
-  box-sizing: border-box;
 }

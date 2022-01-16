@@ -7,7 +7,13 @@
   color: white;  
 }
 
-@media (max-width: 767px) and (min-width: 320px) {
+@media (max-width: 1279px) and (min-width: 917px) {
+  .profile {
+      width: calc(100% - 2*100px);
+  }
+} 
+
+@media (max-width: 865px) and (min-width: 320px) {
   .profile {
     flex-direction: column;
     align-items: center;

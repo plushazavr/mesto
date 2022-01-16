@@ -8,8 +8,8 @@
   row-gap: 20px;
 }
 
-@media (max-width: 767px) and (min-width: 320px) {
-  .elements {
+@media (max-width: 1279px) and (min-width: 320px) {
+  .elements {    
     justify-content: center;
   }
-} 
+}

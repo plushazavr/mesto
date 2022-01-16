@@ -1,0 +1,15 @@
+.button__type_submit {  
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  border: none;
+  position: absolute;
+  bottom: 36px;
+}

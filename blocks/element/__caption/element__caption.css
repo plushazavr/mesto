@@ -7,3 +7,9 @@
   padding-left: 21px;
   padding-right: 30px;
 }
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .element__caption {    
+    padding-right: 15px;
+  }
+} 

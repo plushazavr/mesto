@@ -13,3 +13,10 @@
   background-size: 22px 22px;
   align-self: center;
 }
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .button_type_add {
+    width: 282px;
+    margin: 0px auto;
+  }
+} 

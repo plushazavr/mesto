@@ -6,3 +6,12 @@
   padding-bottom: 51px;
   color: white;  
 }
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .profile {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 42px;
+    padding-bottom: 36px;
+  }
+} 

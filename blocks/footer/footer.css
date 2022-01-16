@@ -3,3 +3,12 @@
   padding-top: 67px;
   padding-bottom: 60px;
 }
+
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .footer {    
+    width: calc(100% - 2*19px);
+    padding-top: 48px;
+    padding-bottom: 36px;
+  }
+} 

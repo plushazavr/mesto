@@ -1,4 +1,13 @@
 .profile__first-block {
   display: flex;
-  align-items: baseline;
+  align-items: baseline;  
+  padding-bottom: 16px;
 }
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .profile__first-block {
+    justify-content: center;
+    padding-top: 22px;    
+    padding-bottom: 14px;
+  }
+} 

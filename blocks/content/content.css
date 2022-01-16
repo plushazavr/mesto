@@ -1,3 +1,9 @@
 .content {
   width: calc(100% - 2*200px);
 }
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .content {
+      width: calc(100% - 2*19px);
+  }
+} 

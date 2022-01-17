@@ -22,8 +22,8 @@ formElement.addEventListener('submit', formSubmitHandler);
 
 /** pop-up edit profile **/
 
-let editButton = document.querySelector('.button__type_edit'); // переменная "открыть ред-е профиля"
-let closeButton = document.querySelector('.button__type_close'); // переменная "закрыть ред-е профиля"
+let editButton = document.querySelector('.button_type_edit'); // переменная "открыть ред-е профиля"
+let closeButton = document.querySelector('.button_type_close'); // переменная "закрыть ред-е профиля"
 let popup = document.querySelector('.popup'); // переменная .popup
 
 function openPopup() {

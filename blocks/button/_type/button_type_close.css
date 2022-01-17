@@ -12,3 +12,13 @@
   top: -40px;
   right: -40px;
 }
+
+@media (max-width: 865px) and (min-width: 320px) {
+  .button_type_close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -36px;
+    right: 0px;
+  }
+}

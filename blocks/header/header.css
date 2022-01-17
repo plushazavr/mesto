@@ -1,5 +1,5 @@
 .header {
-  display: flex;  
+  display: flex;
   justify-content: space-between;
   width: calc(100% - 2*200px);
   padding-top: 45px;

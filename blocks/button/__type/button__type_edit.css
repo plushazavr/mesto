@@ -1,4 +1,4 @@
-.button_type_edit {
+.button__type_edit {
   margin: 0;
   padding: 0;
   margin-left: 18px;
@@ -11,7 +11,7 @@
 }
 
 @media (max-width: 767px) and (min-width: 320px) {
-  .button_type_edit {
+  .button__type_edit {
     width: 18px;
     height: 18px;
     margin-left: 10px;

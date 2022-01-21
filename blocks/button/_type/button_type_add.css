@@ -12,6 +12,7 @@
   background-repeat: no-repeat;
   background-size: 22px 22px;
   align-self: center;
+  opacity: 0.6;
 }
 
 @media (max-width: 865px) and (min-width: 320px) {

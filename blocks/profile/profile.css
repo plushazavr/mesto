@@ -4,12 +4,14 @@
   display: flex;
   padding-top: 40px;
   padding-bottom: 51px;
-  color: white;  
+  color: white;
 }
 
-@media (max-width: 1279px) and (min-width: 917px) {
+@media (max-width: 1279px) and (min-width: 866px) {
   .profile {
       width: calc(100% - 2*100px);
+      margin-left: auto;
+      margin-right: auto;
   }
 } 
 

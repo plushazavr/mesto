@@ -13,6 +13,10 @@
   line-height: 17px;
 }
 
+.popup__input:last-of-type {
+  padding-top: 30px;
+}
+
 @media (max-width: 865px) and (min-width: 320px) {
   .popup__input {
     max-width: 238px;

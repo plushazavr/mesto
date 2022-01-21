@@ -4,6 +4,27 @@ let formElement = document.querySelector('.popup__form');
 let nameInput = formElement.querySelector('.popup__input_type_user');
 let jobInput = formElement.querySelector('.popup__input_type_description');
 
+
+/** pop-up edit profile **/
+// переменная "открыть ред-е профиля"
+let editButton = document.querySelector('.button_type_edit'); 
+
+// переменная "закрыть ред-е профиля"
+let closeButton = document.querySelector('.button_type_close');
+
+// переменная .popup
+let popup = document.querySelector('.popup'); 
+
+//переменные инпута
+let popupInputName = document.querySelector('.popup__input_type_user'); 
+let popupInputAbout = document.querySelector('.popup__input_type_description');
+
+//переменные данных профиля
+let userName = document.querySelector('.profile__user'); 
+let userAbout = document.querySelector('.profile__description');
+
+
+
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
@@ -16,24 +37,23 @@ function formSubmitHandler(evt) {
 
   infoName.textContent = editName;
   infoProfession.textContent = editProfession;
+  closePopup()
 }
 
-formElement.addEventListener('submit', formSubmitHandler);
-
-/** pop-up edit profile **/
-
-let editButton = document.querySelector('.button_type_edit'); // переменная "открыть ред-е профиля"
-let closeButton = document.querySelector('.button_type_close'); // переменная "закрыть ред-е профиля"
-let popup = document.querySelector('.popup'); // переменная .popup
-
+// фун-ция открытия ред-я профиля + переносит данные из профиля в инпуты
 function openPopup() {
-  popup.classList.add('popup__opened');
-} // фун-ция открытия ред-я профиля 
+  popup.classList.add('popup_opened'); 
+  popupInputName.value = userName.textContent; 
+  popupInputAbout.value = userAbout.textContent; 
+}  
 
+// фун-ция закрытия ред-я профиля
 function closePopup() {
-  popup.classList.remove('popup__opened');
-}  // фун-ция закрытия ред-я профиля 
+  popup.classList.remove('popup_opened');
+}
+
 
 editButton.addEventListener('click', openPopup); 
 closeButton.addEventListener('click', closePopup); // вызов функций
 
+formElement.addEventListener('submit', formSubmitHandler);

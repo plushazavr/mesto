@@ -15,10 +15,6 @@ let closeButton = document.querySelector('.button_type_close');
 // переменная .popup
 let popup = document.querySelector('.popup'); 
 
-//переменные инпута
-let popupInputName = document.querySelector('.popup__input_type_user'); 
-let popupInputAbout = document.querySelector('.popup__input_type_description');
-
 //переменные данных профиля
 let userName = document.querySelector('.profile__user'); 
 let userAbout = document.querySelector('.profile__description');
@@ -31,20 +27,16 @@ function formSubmitHandler(evt) {
   const editName = nameInput.value;
   const editProfession = jobInput.value;
 
-  let info = document.querySelector('.profile__info');
-  let infoName = info.querySelector('.profile__user');
-  let infoProfession = info.querySelector('.profile__description');
-
-  infoName.textContent = editName;
-  infoProfession.textContent = editProfession;
+  userName.textContent = editName;
+  userAbout.textContent = editProfession;
   closePopup()
 }
 
 // фун-ция открытия ред-я профиля + переносит данные из профиля в инпуты
 function openPopup() {
   popup.classList.add('popup_opened'); 
-  popupInputName.value = userName.textContent; 
-  popupInputAbout.value = userAbout.textContent; 
+  nameInput.value = userName.textContent; 
+  jobInput.value = userAbout.textContent; 
 }  
 
 // фун-ция закрытия ред-я профиля

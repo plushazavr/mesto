@@ -8,6 +8,10 @@
   background-image: url(../../../images/edit-profile.svg);
   background-position: center;
   background-repeat: no-repeat;
+  
+}
+
+.button_type_edit:hover {
   opacity: 0.6;
 }
 

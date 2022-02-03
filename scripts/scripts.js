@@ -19,6 +19,48 @@ let popup = document.querySelector('.popup');
 let userName = document.querySelector('.profile__user'); 
 let userAbout = document.querySelector('.profile__description');
 
+//карточки "коробки"
+const initialCards = [
+  {
+    name: 'Новогодний наряд',
+    link: 'images/dog-1.jpg'
+  },
+  {
+    name: 'Пузико',
+    link: 'images/dog-2.jpg'
+  },
+  {
+    name: 'Ковбой',
+    link: 'images/dog-4.jpg'
+  },
+  {
+    name: 'Спим в дороге',
+    link: 'images/dog-5.jpg'
+  },
+  {
+    name: 'Дьявол',
+    link: 'images/dog-6.jpg'
+  },
+  {
+    name: 'Кроха',
+    link: 'images/dog-7.jpg'
+  }
+];
+
+//контейнейр для карточек
+const elements = document.querySelector('.elements'); 
+
+//шаблон карточки
+const template = document.querySelector('.template').content; 
+
+function startInitialCards(){
+  initialCards.forEach((item)=>{
+    renderCard(item, elements);
+  });
+}
+
+startInitialCards();
+
 
 
 function formSubmitHandler(evt) {
@@ -49,3 +91,11 @@ editButton.addEventListener('click', openPopup);
 closeButton.addEventListener('click', closePopup); // вызов функций
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+
+
+let password = prompt('Введите пароль:');
+
+if (!password == '') {
+  password = prompt('Пароль обязателен и не может быть пустым.');
+}

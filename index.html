@@ -19,31 +19,37 @@
         <div class="profile__info">
           <div class="profile__block">
             <h1 class="profile__user">Юки</h1>
-            <button type="button" class="button button_type_edit" aria-label="Добавить"></button>
+            <button type="button" class="button button_type_edit" aria-label="Редактировать"></button>
           </div>
           <p class="profile__description">Нетипичный брабансон</p>
         </div>
         <button type="button" class="button button_type_add" aria-label="Добавить"></button>
-      </section>      
-      <section class="elements">
-        <template>
-          <article class="element">
-            <button type="button" class="button button_type_delete" aria-label="Удалить"></button>
-            <img class="element__image" src="" alt="">
-            <div class="element__caption">
-              <h2 class="element__title"></h2>
-              <button type="button" class="button button_type_like" aria-label="Понравилось"></button>
-            </div>
-          </article>
-        </template>         
+      </section>  
+
+      <!-- карточки -->
+      <section class="cards">
+        <article class="card"></article>
       </section>
+
+      <!-- шаблон -->
+      <template class="elements">
+        <article class="element">
+          <button type="button" class="button button_type_delete" aria-label="Удалить"></button>
+          <img class="element__image" src=# alt="">
+          <div class="element__caption">
+            <h2 class="element__title"></h2>
+            <button type="button" class="button button_type_like" aria-label="Понравилось"></button>
+          </div>
+        </article>
+      </template>
+    
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
     
-    <!-- pop-up edit profile -->
-    <div class="popup">
+    <!-- popup редактировать профиль -->
+    <section class="popup popup_type_edit">
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="form-profile">
@@ -53,7 +59,29 @@
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
       </div>
-    </div>
+    </section>
+
+    <!-- popup добавить новое фото -->
+    <section class="popup popup_type_add">
+      <div class="popup__container">
+        <h3 class="popup__title">Новое место</h3>
+        <form class="popup__form" name="form-add_image">
+          <input class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название">
+          <input class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку">
+          <button type="submit" class="button button_type_submit" aria-label="Сохранить">Сохранить</button>
+        </form>
+        <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
+      </div>
+    </section>
+
+    <!-- popup открыть фото -->
+    <section class="popup popup_type_open-image">
+      <div class="popup__window">
+        <button type="button" class="button button_type_close popup__window_close" aria-label="Закрыть"></button>
+        <img class="popup__image" src="#" alt="">
+        <p class="popup__image-title"></p>
+      </div>
+    </section>
 
     <script src="scripts/scripts.js"></script>
   </body>

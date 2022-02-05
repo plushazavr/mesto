@@ -91,21 +91,18 @@ function addListenerCloseButtonClick() {
 addListenerCloseButtonClick();
 
 
-//заполнение полей формы при открытие "ред-ть профиль"
+//заполнение полей формы при открытии "ред-ть профиль"
 function showUserInfoPopup() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
 }
 
-// Отправка формы (без отправки в настоящее время).
+
 function fillSubmitHandler(evt) {
-  // Отмена стандартной отправки формы.
   evt.preventDefault();
-  // Присвоение значений в профиле равных значения в popup с помощью textContent.
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  // Закрываем popup
   closePopup(popupProfile);
 }
 
@@ -135,13 +132,22 @@ function createCard(name, link) {
       evt.target.classList.toggle('button_type_like_active');
   });
 
-  // удалить карточку
+  //удалить карточку
   card.querySelector('.button_type_delete').addEventListener('click', function (evt) {
       const removeCard = evt.target.closest('.element');
       removeCard.remove();
   });
 
+  //посмотреть фото
+  function clickImageHandler() {
+      popupImgFoto.src = link;
+      popupImgText.textContent = name;
+      openPopup(popupImage);
+  }
 
+  card.querySelector('.element__image').addEventListener('click', clickImageHandler);
+  return card;
+}
 
 //добавить карточку
 const addCard = function (name, link) {
@@ -163,14 +169,27 @@ function initializeCards(arr) {
 }
 initializeCards(initialCards);
 
+
 //submit
 formElement.addEventListener('submit', fillSubmitHandler);
 
-//открыть popup ред-я профиля +  заполнения данным из профиля
+//открыть ред-е профиля
 profileEditBtn.addEventListener('click', showUserInfoPopup);
-//закрыть popup ред-я профиля
+//закрыть ред-е профиля
 popupProfileCloseButton.addEventListener('click', () => {
   closePopup(popupProfile);
 });
 
+//открыть добавление карточки
+openPopupAddButton.addEventListener('click', () => {
+  openPopup(popupAdd);
+});
+//закрыть добавление карточки
+closePopupAddButton.addEventListener('click', () => {
+  closePopup(popupAdd);
+});
 
+//закрыть просмотр фото
+popupImgCloseButton.addEventListener('click', () => {
+  closePopup(popupImage);
+});

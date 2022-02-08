@@ -127,6 +127,7 @@ function createCard(name, link) {
   const card = templateElement.content.cloneNode(true);
   card.querySelector('.element__title').textContent = name;
   card.querySelector('.element__image').src = link;
+  card.querySelector('.element__image').alt = name;
   // Лайк
   card.querySelector('.button_type_like').addEventListener('click', function (evt) {
       evt.target.classList.toggle('button_type_like_active');
@@ -142,6 +143,7 @@ function createCard(name, link) {
   function clickImageHandler() {
       popupImgPhoto.src = link;
       popupImgText.textContent = name;
+      popupImgPhoto.alt = name;
       openPopup(popupImage);
   }
 

@@ -75,14 +75,13 @@ function closePopup(popup) {
 //нажатие на крестик на всех popup
 function addListenerCloseButtonClick() {
   //все popup
-  let popups = document.querySelectorAll('.popup');
+  const popups = document.querySelectorAll('.popup');
   //закрытие по нажатию
   popups.forEach(popup => {
       popup.addEventListener('click', (event) => {
-          if (!(event.target === event.target.classList.contains('button_type_close'))) {
-              return;
-          }
+        if (event.target.classList.contains('button_type_close')) {
           closePopup(popup);
+        }
       });
   });
 
@@ -177,21 +176,22 @@ formPopup.addEventListener('submit', fillSubmitHandler);
 
 //открыть ред-е профиля
 buttonProfileEdit.addEventListener('click', showUserInfoPopup);
-//закрыть ред-е профиля
+/*//закрыть ред-е профиля
 buttonProfileClose.addEventListener('click', () => {
   closePopup(popupProfile);
-});
+});*/
 
 //открыть добавление карточки
 buttonPopupAdd.addEventListener('click', () => {
   openPopup(popupAdd);
 });
-//закрыть добавление карточки
+/*//закрыть добавление карточки
 buttonPopupClose.addEventListener('click', () => {
   closePopup(popupAdd);
-});
+});*/
 
-//закрыть просмотр фото
+/*//закрыть просмотр фото
 buttonPopupImgClose.addEventListener('click', () => {
   closePopup(popupImage);
-});
+});*/
+

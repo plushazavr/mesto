@@ -53,9 +53,9 @@
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="form-profile">
-          <input class="popup__input popup__input_type_user" type="text" name="user-name" placeholder="Имя">
-          <input class="popup__input popup__input_type_description" type="text" name="about" placeholder="О себе">
-          <button type="submit" class="button button_type_submit" aria-label="Сохранить">Сохранить</button>
+          <input class="popup__input popup__input_type_user" type="text" name="user-name" placeholder="Имя" maxlength="40" minlength="2" required>
+          <input class="popup__input popup__input_type_description" type="text" name="about" placeholder="О себе" maxlength="200" minlength="2" required>
+          <button type="submit" class="button button_type_submit button_type_submit_inactive" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
       </div>
@@ -66,9 +66,9 @@
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form" name="form-add_image">
-          <input class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название">
-          <input class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку">
-          <button type="submit" class="button button_type_submit" aria-label="Сохранить">Сохранить</button>
+          <input class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название" maxlength="30" minlength="2" required>
+          <input class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку" required>
+          <button type="submit" class="button button_type_submit button_type_submit_inactive" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
       </div>
@@ -84,5 +84,6 @@
     </section>
 
     <script src="scripts/scripts.js"></script>
+    <script src="scripts/validate.js"></script>
   </body>
 </html>

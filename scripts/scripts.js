@@ -71,14 +71,14 @@ function closePopup(popup) {
 }
 
 
-//нажатие на крестик на всех popup
+//нажатие на всех popup
 function addListenerCloseButtonClick() {
   //все popup
   const popups = document.querySelectorAll('.popup');
-  //закрытие по нажатию
+  //закрытие по нажатию на крестик и оверлей
   popups.forEach(popup => {
       popup.addEventListener('click', (event) => {
-        if (event.target.classList.contains('button_type_close')) {
+        if (event.target === event.currentTarget || event.target.classList.contains('button_type_close')) {
           closePopup(popup);
         }
       });

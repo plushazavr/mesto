@@ -59,15 +59,26 @@ const popupImgText = popupImage.querySelector('.popup__image-title');
 const popupImgPhoto = popupImage.querySelector('.popup__image');
 const buttonPopupImgClose = popupImage.querySelector('.button_type_close');
 
+function addEventListenerEscape() {
+  document.addEventListener('keydown', closePopupOnEscButton);
+}
+
+function removeEventListenerEscape() {
+  document.removeEventListener('keydown', closePopupOnEscButton);
+}
+
+
 
 //открыть popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  addEventListenerEscape();
 }
 
 //закрыть popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  removeEventListenerEscape();
 }
 
 
@@ -88,6 +99,15 @@ function addListenerCloseButtonClick() {
 
 addListenerCloseButtonClick();
 
+
+
+//закрытие popup на esc
+const closePopupOnEscButton = function (evt) {
+  if (evt.key === "Escape") {
+      const openedPopup = document.querySelector('.popup_opened');
+      closePopup(openedPopup);
+  }
+};
 
 //заполнение полей формы при открытии "ред-ть профиль"
 function showUserInfoPopup() {

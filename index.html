@@ -53,8 +53,10 @@
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="form-profile">
-          <input class="popup__input popup__input_type_user" type="text" name="user-name" placeholder="Имя" maxlength="40" minlength="2" required>
-          <input class="popup__input popup__input_type_description" type="text" name="about" placeholder="О себе" maxlength="200" minlength="2" required>
+          <input id="name-input" class="popup__input popup__input_type_user" type="text" name="user-name" placeholder="Имя" maxlength="40" minlength="2" required>
+          <span class="popup__input_type_error popup-name-error"></span>
+          <input id="about-input" class="popup__input popup__input_type_description" type="text" name="about" placeholder="О себе" maxlength="200" minlength="2" required>
+          <span class="popup__input_type_error popup-about-error"></span>
           <button type="submit" class="button button_type_submit button_type_submit_inactive" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
@@ -66,8 +68,10 @@
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form" name="form-add_image">
-          <input class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название" maxlength="30" minlength="2" required>
-          <input class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку" required>
+          <input id="caption-input" class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название" maxlength="30" minlength="2" required>
+          <span class="popup__input_type_error popup-add-name-error"></span>
+          <input id="link-input" class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку" required>
+          <span class="popup__input_type_error link-error"></span>
           <button type="submit" class="button button_type_submit button_type_submit_inactive" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>

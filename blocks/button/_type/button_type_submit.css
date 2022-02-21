@@ -11,7 +11,8 @@
   text-align: center;
   border: none;
   margin-bottom: 37px;
-  margin-top: 48px; 
+  margin-top: 48px;
+  opacity: 1;
 }
 
 .button_type_submit:hover {

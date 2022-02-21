@@ -59,6 +59,7 @@ const popupImgText = popupImage.querySelector('.popup__image-title');
 const popupImgPhoto = popupImage.querySelector('.popup__image');
 const buttonPopupImgClose = popupImage.querySelector('.button_type_close');
 
+
 function addEventListenerEscape() {
   document.addEventListener('keydown', closePopupOnEscButton);
 }
@@ -99,6 +100,18 @@ function addListenerCloseButtonClick() {
 
 addListenerCloseButtonClick();
 
+
+
+// При повторном открытии и после закрытия проверим валидность и состояние кнопки
+function nextOpenProfilePopup () {
+  // Проверим валидность существующих данных и если валидно убирааем текст ошибки,
+  isValid(popupAddForm, inputUser, config);
+  isValid(popupAddForm, inputDescription, config);
+  // а также включаем кнопку
+  submitButtonSelector.classList.remove(config.inactiveButtonClass);
+  submitButtonSelector.disabled = false;
+
+}
 
 
 //закрытие popup на esc

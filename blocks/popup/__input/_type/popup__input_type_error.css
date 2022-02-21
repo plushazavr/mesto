@@ -1,0 +1,26 @@
+.popup__input_type_error {
+  margin: -26px 0 0 36px;
+  font-size: 12px;
+  line-height: 1.25;
+  min-height: 15px;
+  color: #FF0000;
+  opacity: 0;
+}
+
+@media screen and (max-width: 1140px) {
+  .popup__input_type_error {
+    margin: -26px 0 0 40px;
+  }
+}
+
+@media screen and (max-width: 984px) {
+  .popup__input_type_error {
+    margin: -26px 0 0 24px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .popup__input_type_error {
+    margin: -26px 0 0 22px;
+  }
+}

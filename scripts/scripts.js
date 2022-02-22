@@ -114,6 +114,14 @@ function nextOpenProfilePopup () {
 }
 
 
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+  profileUser.textContent = inputUser.value;
+  profileDescription.textContent = inputDescription.value;
+  closePopup(popupProfile);
+}
+
+
 //закрытие popup на esc
 const closePopupOnEscButton = function (evt) {
   if (evt.key === "Escape") {
@@ -130,12 +138,6 @@ function showUserInfoPopup() {
 }
 
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  profileUser.textContent = inputUser.value;
-  profileDescription.textContent = inputDescription.value;
-  closePopup(popupProfile);
-}
 
 //поля формы новой карточки
 popupAddForm.addEventListener('submit', e => {

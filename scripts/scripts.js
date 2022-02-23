@@ -1,3 +1,14 @@
+
+
+ enableValidation = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  errorVisibleClass: 'popup__input_type_error_active',
+  inactiveButtonClass: 'button_type_submit_inactive',
+  submitButtonSelector: '.button_type_submit',
+}
+
 //карточки "коробки"
 const initialCards = [
   {
@@ -26,25 +37,25 @@ const initialCards = [
   }
 ];
 
+//ПЕРЕМЕННЫЕ
 //кнопки popup
 const profile = document.querySelector('.profile');
 const buttonProfileEdit = document.querySelector('.button_type_edit');
 const popupProfile = document.querySelector('.popup_type_edit');
 const buttonProfileClose = popupProfile.querySelector('.button_type_close');
-
 // формы заполнения данных popup
 const profileForm = popupProfile.querySelector('.popup__form');
 const inputUser = profileForm.querySelector('.popup__input_type_user');
 const inputDescription = profileForm.querySelector('.popup__input_type_description');
-
 //переменные данных профиля
 const profileUser = profile.querySelector('.profile__user');
 const profileDescription = profile.querySelector('.profile__description');
-
+//кнопка "сохранить"
+const submitBtnProfile = popupProfile.querySelector('.button_type_submit');
+const submitBtnAdd = popupAdd.querySelector('.button_type_submit');
 //карточки и шаблон
 const cardsList = document.querySelector('.card');
 const templateElement = document.querySelector('.elements');
-
 //добавить карточку
 const popupAdd = document.querySelector('.popup_type_add');
 const buttonPopupAdd = document.querySelector('.button_type_add');
@@ -52,14 +63,13 @@ const buttonPopupClose = popupAdd.querySelector('.button_type_close');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
-
 //посмотреть фото
 const popupImage = document.querySelector('.popup_type_open-image');
 const popupImgText = popupImage.querySelector('.popup__image-title');
 const popupImgPhoto = popupImage.querySelector('.popup__image');
 const buttonPopupImgClose = popupImage.querySelector('.button_type_close');
 
-
+//ФУНКЦИИ
 function addEventListenerEscape() {
   document.addEventListener('keydown', closePopupOnEscButton);
 }
@@ -136,6 +146,7 @@ function showUserInfoPopup() {
   inputDescription.value = profileDescription.textContent;
   openPopup(popupProfile);
 }
+
 
 
 

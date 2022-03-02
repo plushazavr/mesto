@@ -1,41 +1,54 @@
-const formSubmit = (event) => {
-  event.preventDefault();
+const enableValidation = data => {
+  const forms = [...document.querySelectorAll(data.formSelector)]
+  forms.forEach(form => addFormsListener(form, data))
 }
 
-const checkButtonValidity = (config, popupForm, submitButton) => {
-  if(popupForm.checkValidity()) {
-      submitButton.removeAttribute('disabled');
-      submitButton.classList.remove(config.inactiveButtonClass);
+// Добавление форм
+const addFormsListener = (form, config) => {
+  form.addEventListener('submit', handleSubmit)
+  form.addEventListener('input', () => setSubmitButtonState(form, config))
+
+  const inputs = [...form.querySelectorAll(config.inputSelector)]
+  inputs.forEach(input => input.addEventListener('input', () => handleField(form,input, config)))
+
+  setSubmitButtonState(form, config);
+}
+
+//Сбор отправки формы
+const handleSubmit = evt => {
+  evt.preventDefault()
+}
+
+//Проверка на волидность формы
+const handleField = (form, input, config) => {
+  if (input.validity.valid) {
+      hideErrors(form, input,config)
   } else {
-      submitButton.setAttribute('disabled', '');
-      submitButton.classList.add(config.inactiveButtonClass);
+      showErrors(form, input,config)
   }
 }
 
-const checkInputValidity = (config, popupForm, input) => {
-  const errorMessage = popupForm.querySelector(`#error-${input.id}`);
-  if(input.validity.valid) {
-      errorMessage.textContent = '';
-      input.classList.remove(config.inputErrorClass);
-  } else {
-      errorMessage.textContent = input.validationMessage;
-      input.classList.add(config.inputErrorClass);
-  }
+//Показать ошибки
+const showErrors = (form, input, config) => {
+  input.classList.add(config.inputErrorClass);
+  const errorElement = form.querySelector(`#${input.id}-errors`);
+  errorElement.textContent = input.validationMessage
 }
 
-function enableValidation(config) {
-  const currentForm = document.querySelector(config.currentFormSelector);
-  const popupForm = currentForm.querySelector(config.formSelector);
-  popupForm.addEventListener('submit', formSubmit);
-  const inputSelector = currentForm.querySelectorAll(config.inputSelector);
-  const submitButton = currentForm.querySelector(config.submitButtonSelector);
-
-  checkButtonValidity(config, popupForm, submitButton);
-
-  inputSelector.forEach((input) => {
-      input.addEventListener('input', () => {
-          checkInputValidity(config, popupForm, input);
-          checkButtonValidity(config, popupForm, submitButton);
-      });
-  });
+//Убрать ошибки
+const hideErrors = (form, input, config) => {
+  input.classList.remove(config.inputErrorClass);
+  const errorElement = form.querySelector(`#${input.id}-errors`);
+  errorElement.textContent = ''
 }
+
+// Проверка состояния кнопки сабмит
+const setSubmitButtonState = (form, config) => {
+  const button = form.querySelector(config.submitButtonSelector)
+  button.disabled = !form.checkValidity();
+  button.classList.toggle(config.inactiveButtonClass, !form.checkValidity())
+}
+
+enableValidation(formValidationConfig);
+
+

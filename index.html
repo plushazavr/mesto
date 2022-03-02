@@ -2,13 +2,12 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Проектная работа Екатерины Казанцевой на Яндекс Практикуме">
   <meta name="keywords" content="html, css, javascript">
   <meta name="author" content="Екатерина Казанцева">
   <link rel="stylesheet" href="pages/index.css">
-  <title>Место</title>
+  <title>Mesto</title>
 </head>
 <body class="root">
     <header class="header">      
@@ -53,14 +52,14 @@
     <section class="popup popup_type_edit">
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
-        <form class="popup__form popup__form_profile" name="form-profile" novalidate>
-          <input id="name-input" class="popup__input popup__input_type_user" type="text" name="user-name" placeholder="Имя" maxlength="40" minlength="2" required>
-          <span class="popup-name-error popup__input_type_error" id="name-error"></span>
+        <form class="popup__form popup__form_profile" novalidate>
+          <input class="popup__input popup__input_type_user" type="text" placeholder="Имя" value=""  maxlength="40" minlength="2" id="name-input" required>
+          <span class="popup__input_type_error" id="user-error"></span>
           <input id="about-input" class="popup__input popup__input_type_description" type="text" name="about" placeholder="О себе" maxlength="200" minlength="2" required>
-          <span class="popup-about-error popup__input_type_error" id="job-error"></span>
-          <button type="submit" class="button button_type_submit" name="submit" type="submit" aria-label="Сохранить">Сохранить</button>
+          <span class="popup__input_type_error" id="about-error"></span>
+          <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
-        <button type="submit" class="button button_type_close" aria-label="Закрыть"></button>
+        <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
       </div>
     </section>
 
@@ -68,14 +67,14 @@
     <section class="popup popup_type_add">
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
-        <form class="popup__form popup__form_add" name="form-add_image" novalidate>
-          <input id="caption-input" class="popup__input popup__input_type_title" type="text" name="user-name" placeholder="Название" maxlength="30" minlength="2" required>
-          <span class="popup-add-name-error popup__input_type_error" id="place-error" ></span>
-          <input id="link-input" class="popup__input popup__input_type_link" type="url" name="about" placeholder="Ссылка на картинку" required>
-          <span class="link-error popup__input_type_error" id="url-error"></span>
-          <button type="submit" class="button button_type_submit" name="submit" type="submit" aria-label="Сохранить">Сохранить</button>
+        <form class="popup__form popup__form_add" novalidate>
+          <input id="caption-input" class="popup__input popup__input_type_title" type="text" placeholder="Название" maxlength="30" minlength="2" required>
+          <span class="popup__input_type_error" id="place-error" ></span>
+          <input id="link-input" class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" required>
+          <span class="popup__input_type_error" id="url-error"></span>
+          <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
-        <button type="submit" class="button button_type_close" aria-label="Закрыть"></button>
+        <button type="button" class="button button_type_close" aria-label="Закрыть"></button>
       </div>
     </section>
 
@@ -88,8 +87,7 @@
       </div>
     </section>
 
-    
-    <script src="scripts/cards.js"></script>
+       
     <script src="scripts/scripts.js"></script>
     <script src="scripts/validate.js"></script>
   </body>

@@ -1,3 +1,11 @@
 .popup__input_type_error-message {
-  border-color: #FF3333;
+  visibility: hidden;
+  max-width: 358px;
+  min-height: 15px;
+  color: #FF0000;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  padding-top: 5px;
+  border: none;
 }

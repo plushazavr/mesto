@@ -1,21 +1,47 @@
-// Выбираем секцию elements в которой отрисовывем изначальные карточки из массива, выбираем template для картинок, которые будет отрисовывать по контенту, содержащемуся в нем.
+const initialCards = [
+  {
+    name: 'Новогодний наряд',
+    link: 'images/dog-1.jpg'
+  },
+  {
+    name: 'Пузико',
+    link: 'images/dog-2.jpg'
+  },
+  {
+    name: 'Ковбой',
+    link: 'images/dog-4.jpg'
+  },
+  {
+    name: 'Спим в дороге',
+    link: 'images/dog-5.jpg'
+  },
+  {
+    name: 'Дьявол',
+    link: 'images/dog-6.jpg'
+  },
+  {
+    name: 'Кроха',
+    link: 'images/dog-7.jpg'
+  }
+];
+
 const sectionElements = document.querySelector('.cards');
 const template = document.querySelector('.elements').content;
 const popups = document.querySelector('.popup');
 
-// Создаем переменные для узлов кнопки редактирования профиля, блока попапа, в томч числе кнопки закрытия
+
 const buttonProfileEditOpen = document.querySelector('.button_type_edit');
 const popupProfileEdit = document.querySelector('.popup_type_edit');
 const buttonProfileClose = document.querySelector('.button_type_close');
 
-// Создаем переменные для формы попапа, input-ов внутри формы, в которые вводятся измененные данные профиля, а также полей профиля которые будут отрисованы нами при загрузке страницы по умолчанию
+
 const formProfileEdit = document.querySelector('.popup__form_profile');
 const nameInput = formProfileEdit.querySelector('.popup__input_type_user');
 const nicknameInput = formProfileEdit.querySelector('.popup__input_type_description');
 const profielName = document.querySelector('.profile__user');
 const profileNickname = document.querySelector('.profile__description');
 
-// Создаем переменные в которых храним поля нового попапа, кнопку профайла для добавления карточек
+
 const popupAddCard = document.querySelector('.popup_type_add');
 const buttonAddCardOpen = document.querySelector('.button_type_add');
 const buttonAddCardClose = document.querySelector('.button_type_close');
@@ -23,19 +49,19 @@ const cardInput = document.querySelector('.popup__input_type_title');
 const cardImage = document.querySelector('.popup__input_type_link');
 const formAddCard = document.querySelector('.popup__form_add');
 
-// Создаем переменные для открытия и закрытия попапа с картинкой
+
 const imagePopup = document.querySelector('.popup_type_open-image');
 const imagePopupItem = document.querySelector('.popup__image');
 const imagePopupCaption = document.querySelector('.popup__image-title');
 const closePopupImageButton = document.querySelector('.button_type_close');
 
 
-// Создаем функцию для отрисовки карточек с вызовом функции по клонированию template с заполнением соответствующих полей и фото и заголовка, полученных из массива, вызываем функцию render
+
 function render(card) {
   card.forEach((card) => sectionElements.append(createCard(card)));
 }
 
-// Создаем функцию подо все последующие манипуляции с карточками
+
 function createCard(item) {
   const newElement = template.cloneNode(true);
   const cardPhoto = newElement.querySelector('.element__image');
@@ -51,7 +77,7 @@ function createCard(item) {
 
 render(initialCards);
 
-// Создаем функцию для открытия окна popup, а также присваиваем полям попапа изначальные значения, полученные из полей профайла, по умолчанию при первой загрузке
+
 function openPopupProfile() {
   nameInput.value = profielName.textContent;
   nicknameInput.value = profileNickname.textContent;
@@ -72,7 +98,7 @@ function openPopup(popup) {
   document.addEventListener('keydown', closeByEscape);
 }
 
-// Прописываем функцию закрытия попапа через клик на оверлей
+
 function closeByEscape(event) {
   if(event.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened');
@@ -80,7 +106,7 @@ function closeByEscape(event) {
   }
 }
 
-// Прописываем функцию закрытия попапа при клике на крестик
+
 function closePopupProfile() {
   closePopup(popupProfileEdit);
 }
@@ -91,19 +117,19 @@ function closePopup(popup) {
   document.removeEventListener('keydown', closeByEscape);
 }
 
-// Вешаем обработчик событий на оверлей для закрытия попапа при клике на затененную область
+
 function closePopupWithClickOnOverlay(popup) {
   if(popup.target === popup.currentTarget) {
     closePopup(popup.target);
   }
 }
 
-// Вешаем обработчики событий на кнопку редактирования профиля и на крестик закртия попапа
+
 buttonProfileEditOpen.addEventListener('click', openPopupProfile);
 buttonProfileClose.addEventListener('click', closePopupProfile);
 
 
-// Пишем функцию для вставки в поля профайла данных из интпутов попапа, введенные пользователем
+
 function handleProfileFormSubmit(event) {
   event.preventDefault();
   profielName.textContent = nameInput.value;
@@ -111,10 +137,10 @@ function handleProfileFormSubmit(event) {
   closePopupProfile();
 }
 
-// Вешаем обработчик событий на форму попапа, при нажатии кнопки сохранения
+
 formProfileEdit.addEventListener('submit', handleProfileFormSubmit);
 
-// Создаем функции открытия и закрытия попапа с карточками
+
 function openPopupCardWindow() {
   openPopup(popupAddCard);
   enableValidation({
@@ -131,11 +157,11 @@ function closePopupCardWindow() {
   closePopup(popupAddCard);
 }
 
-// Вешаем обработчики на кнопки попапа с карточками
+
 buttonAddCardOpen.addEventListener('click', openPopupCardWindow);
 buttonAddCardClose.addEventListener('click', closePopupCardWindow);
 
-// Создаем функцию добавления новой карточки при нажатии кнопки в попапе с карточками
+
 function cardSubmitHandler(event) {
   event.preventDefault();
   const newCard = 
@@ -150,20 +176,20 @@ function cardSubmitHandler(event) {
   closePopupCardWindow();
 }
 
-// Вешаем обработчик событий на форму попапа с карточками
+
 formAddCard.addEventListener('submit', cardSubmitHandler);
 
-// Создаем функцию для лайков
+
 function likeFunction(e) {
   e.target.classList.toggle('button_type_like_active');
 }
 
-//Создаем функцию для удаления карточек
+
 function deleteCard(e) {
   e.target.closest('.element').remove();
 }
 
-// Создаем функцию для открытия попапа с картинкой
+
 function openImagePopup(name, link) {
   openPopup(imagePopup);
   imagePopupItem.src = link;
@@ -171,7 +197,7 @@ function openImagePopup(name, link) {
   imagePopupItem.alt = name;
 }
 
-// Создаем функцию закрытия попапа с картинкой
+
 function closeImagePopup() {
   closePopup(imagePopup);
 }

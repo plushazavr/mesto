@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Проектная работа Екатерины Казанцевой на Яндекс Практикуме">
   <meta name="keywords" content="html, css, javascript">
@@ -32,7 +33,7 @@
       </section>
 
       <!-- шаблон -->
-      <template class="elements">
+      <template class="elements" id="elements">
         <article class="element">
           <button type="button" class="button button_type_delete" aria-label="Удалить"></button>
           <img class="element__image" src=# alt="">
@@ -71,7 +72,7 @@
           <input id="caption-input" class="popup__input popup__input_type_title" type="text" placeholder="Название" maxlength="30" minlength="2" required>
           <span class="popup__input_type_error" id="place-error" ></span>
           <input id="link-input" class="popup__input popup__input_type_link" type="url" placeholder="Ссылка на картинку" required>
-          <span class="popup__input_type_error" id="url-error"></span>
+          <span class="popup__input_type_error popup__input_type_error_visible" id="url-error"></span>
           <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close" aria-label="Закрыть"></button>

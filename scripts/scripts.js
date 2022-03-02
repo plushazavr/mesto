@@ -184,5 +184,5 @@ const formValidationConfig = {
     submitButtonSelector: '.button_type_submit',
     inactiveButtonClass: 'button_type_submit_inactive',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input_type_error_visible'
+    errorClass: 'popup__error_visible'
 }

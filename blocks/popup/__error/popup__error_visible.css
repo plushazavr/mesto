@@ -1,4 +1,4 @@
-.popup__input_type_error_visible {
+.popup__error_visible {
   visibility: visible;
   opacity: 1;
 }

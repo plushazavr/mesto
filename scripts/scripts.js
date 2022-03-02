@@ -81,8 +81,9 @@ const openPopup = (popup) => {
 
 // Первоначальная загрузка данных Редактировать профиль
 const getFormEditProfile = () => {
-    aboutMeProfile.textContent = aboutMeInput.value;
-    personProfile.textContent = personInput.value;
+  aboutMeInput.value = aboutMeProfile.textContent;
+  personInput.value = personProfile.textContent;
+  openPopup(popupEditProfile);
 }
 
 // Создание попапа Zooming Image

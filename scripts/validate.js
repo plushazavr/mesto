@@ -9,7 +9,7 @@ const addFormsListener = (form, config) => {
   form.addEventListener('input', () => setSubmitButtonState(form, config))
 
   const inputs = [...form.querySelectorAll(config.inputSelector)]
-  inputs.forEach(input => input.addEventListener('input', () => handleField(form,input, config)))
+  inputs.forEach(input => input.addEventListener('input', () => handleField(form, input, config)))
 
   setSubmitButtonState(form, config);
 }
@@ -22,23 +22,23 @@ const handleSubmit = evt => {
 //Проверка на волидность формы
 const handleField = (form, input, config) => {
   if (input.validity.valid) {
-      hideErrors(form, input,config)
+      hideErrors(form, input, config)
   } else {
-      showErrors(form, input,config)
+      showErrors(form, input, config)
   }
 }
 
 //Показать ошибки
 const showErrors = (form, input, config) => {
   input.classList.add(config.inputErrorClass);
-  const errorElement = form.querySelector(`#${input.id}-errors`);
+  const errorElement = form.querySelector(`#${input.id}-error`);
   errorElement.textContent = input.validationMessage
 }
 
 //Убрать ошибки
 const hideErrors = (form, input, config) => {
   input.classList.remove(config.inputErrorClass);
-  const errorElement = form.querySelector(`#${input.id}-errors`);
+  const errorElement = form.querySelector(`#${input.id}-error`);
   errorElement.textContent = ''
 }
 

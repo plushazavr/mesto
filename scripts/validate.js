@@ -1,13 +1,18 @@
 const showError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#${inputElement}-error`);
+  const errorElement = inputElement
+    .closest('.popup_type_add')
+    .querySelector('.popup__error')
+  errorElement.classList.add('popup__error_visible');
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('.popup__error_visible');
 }
 
 const hideError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#${inputElement}-error`);
+  const errorElement = inputElement
+    .closest('.popup_type_add')
+    .querySelector('.popup__error')
+  errorElement.classList.remove('popup__error_visible');
   errorElement.textContent = '';
-  errorElement.classList.remove('.popup__error_visible');
+  
 }
 
 const checkValidity = (formElement, inputElement) => {

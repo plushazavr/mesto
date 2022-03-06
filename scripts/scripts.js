@@ -183,6 +183,6 @@ const formValidationConfig = {
     inputSelector: '.popup__input',
     submitButtonSelector: '.button_type_submit',
     inactiveButtonClass: 'button_type_submit_inactive',
-    inputErrorClass: 'popup__input_type_error',
+    inputErrorClass: 'popup__error',
     errorClass: 'popup__error_visible'
 }

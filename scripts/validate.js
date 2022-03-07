@@ -28,14 +28,31 @@ const checkValidity = (formElement, inputElement) => {
    }
 }
 
+const toggleButtonState = (inputList, submitButtonSelector) => {
+  const hasInvalidInput = Array.from(inputList).some(inputElement => {
+    return !inputElement.validity.valid
+  });
+  if (hasInvalidInput) {
+    submitButtonSelector.classList.add('button_type_submit_inactive');
+    submitButtonSelector.setAttribute("disable", true)
+  } else {
+    submitButtonSelector.classList.remove('button_type_submit_inactive');
+    submitButtonSelector.sremoveAttribute("disable");
+  }
+
+}
+
 const setEventListeners = (formElement) => {
   const inputList = formElement.querySelectorAll('.popup__input');
+  const submitButtonSelector = formElement.querySelector('.button_type_submit');
   inputList.forEach(inputElement => {
-    inputElement.addEventListener('input', (event) => {
+    const handleInput = (event) => {
       checkValidity(formElement, inputElement);
-    });
+      toggleButtonState(inputList, submitButtonSelector)
+    };
+    inputElement.addEventListener('input', handleInput);
   });
-}
+};
 
 
 

@@ -1,6 +1,8 @@
+
+
 const getErrorElement = (inputElement) => {
   return inputElement
-    .closest('.popup')
+    .closest('.form')
     .querySelector('.popup__error')
 }
 
@@ -37,7 +39,7 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
     submitButtonSelector.setAttribute("disable", true)
   } else {
     submitButtonSelector.classList.remove('button_type_submit_inactive');
-    submitButtonSelector.sremoveAttribute("disable");
+    submitButtonSelector.removeAttribute("disable");
   }
 
 }
@@ -52,6 +54,7 @@ const setEventListeners = (formElement) => {
     };
     inputElement.addEventListener('input', handleInput);
   });
+  toggleButtonState(inputList, submitButtonSelector);
 };
 
 

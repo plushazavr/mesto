@@ -1,15 +1,17 @@
-const showError = (formElement, inputElement, errorMessage) => {
-  const errorElement = inputElement
-    .closest('.popup_type_add')
+const getErrorElement = (inputElement) => {
+  return inputElement
+    .closest('.popup')
     .querySelector('.popup__error')
+}
+
+const showError = (formElement, inputElement, errorMessage) => {
+  const errorElement = getErrorElement(inputElement);    
   errorElement.classList.add('popup__error_visible');
   errorElement.textContent = errorMessage;
 }
 
 const hideError = (formElement, inputElement) => {
-  const errorElement = inputElement
-    .closest('.popup_type_add')
-    .querySelector('.popup__error')
+  const errorElement = getErrorElement(inputElement);
   errorElement.classList.remove('popup__error_visible');
   errorElement.textContent = '';
   

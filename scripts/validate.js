@@ -7,15 +7,17 @@ const getErrorElement = (inputElement) => {
 }
 
 const showError = (formElement, inputElement, errorMessage) => {
-  const errorElement = getErrorElement(inputElement);    
-  errorElement.classList.add('popup__error_visible');
-  errorElement.textContent = errorMessage;
+  const errorElement = getErrorElement(inputElement); 
+  inputElement.classList.add('form__input_error');
+  errorElement.textContent = errorMessage;    
+  errorElement.classList.add('popup__error_visible'); 
 }
 
 const hideError = (formElement, inputElement) => {
   const errorElement = getErrorElement(inputElement);
-  errorElement.classList.remove('popup__error_visible');
+  inputElement.classList.remove('form__input_error');
   errorElement.textContent = '';
+  errorElement.classList.remove('popup__error_visible');
   
 }
 

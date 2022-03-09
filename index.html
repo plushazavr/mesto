@@ -54,7 +54,7 @@
       <div class="popup__container">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form popup__form_profile" novalidate>
-          <div class="form">
+          <label class="form">
             <input class="popup__input popup__input_type_user" 
             id="name-input"
             name="name-input"
@@ -64,8 +64,8 @@
             minlength="2"           
             required>
             <span class="popup__error"></span>
-          </div>
-          <div class="form">
+          </label>
+          <label class="form">
             <input class="popup__input popup__input_type_description"
             id="about-input"
             name="about"
@@ -75,8 +75,9 @@
             minlength="2"
             required>
             <span class="popup__error"></span>
-            <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
-          </div>
+          </label>
+          <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
+          
         </form>
         <button type="button" class="button button_type_close button_type_close_edit-profile" aria-label="Закрыть"></button>
       </div>
@@ -87,7 +88,7 @@
       <div class="popup__container">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form popup__form_add" novalidate>
-          <div class="form">
+          <label class="form">
             <input class="popup__input popup__input_type_title"
             id="caption-input"
             type="text"
@@ -97,8 +98,8 @@
             minlength="2"
             required>
             <span class="popup__error"></span>
-          </div>
-          <div class="form">
+          </label>
+          <label class="form">
             <input class="popup__input popup__input_type_link"
             id="link-input"
             type="url"
@@ -106,8 +107,8 @@
             placeholder="Ссылка на картинку"
             required>
             <span class="popup__error"></span>
-            <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
-          </div>
+          </label>
+          <button type="submit" class="button button_type_submit" type="submit" aria-label="Сохранить">Сохранить</button>
         </form>
         <button type="button" class="button button_type_close button_type_close_add" aria-label="Закрыть"></button>
       </div>

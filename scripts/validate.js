@@ -1,5 +1,3 @@
-
-
 const getErrorElement = (inputElement) => {
   return inputElement
     .closest('.form')
@@ -17,8 +15,7 @@ const hideError = (formElement, inputElement) => {
   const errorElement = getErrorElement(inputElement);
   inputElement.classList.remove('form__input_error');
   errorElement.textContent = '';
-  errorElement.classList.remove('popup__error_visible');
-  
+  errorElement.classList.remove('popup__error_visible');  
 }
 
 const checkValidity = (formElement, inputElement) => {
@@ -43,10 +40,7 @@ const toggleButtonState = (inputList, submitButtonSelector) => {
     submitButtonSelector.classList.remove('button_type_submit_inactive');
     submitButtonSelector.removeAttribute("disable");
   }
-
 }
-
-
 
 const setEventListeners = (formElement) => {
   const inputList = formElement.querySelectorAll('.popup__input');
@@ -60,8 +54,6 @@ const setEventListeners = (formElement) => {
   });
   toggleButtonState(inputList, submitButtonSelector);
 };
-
-
 
 const enableValidation =  () => {
   const formList = document.querySelectorAll('.popup__form');

@@ -31,6 +31,7 @@ const profile = document.querySelector('.profile');
 const buttonProfileEdit = document.querySelector('.button_type_edit');
 const popupProfile = document.querySelector('.popup_type_edit');
 const buttonProfileClose = popupProfile.querySelector('.button_type_close');
+const submitButton = popupProfile.querySelector('.button_type_submit');
 
 // формы заполнения данных popup
 const profileForm = popupProfile.querySelector('.popup__form');
@@ -68,7 +69,6 @@ function removeEventListenerEscape() {
 }
 
 
-
 //открыть popup
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -80,7 +80,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   removeEventListenerEscape();
 }
-
 
 //нажатие на всех popup
 function addListenerCloseButtonClick() {
@@ -94,12 +93,9 @@ function addListenerCloseButtonClick() {
         }
       });
   });
-
 }
 
 addListenerCloseButtonClick();
-
-
 
 //закрытие popup на esc
 const closePopupOnEscButton = function (evt) {
@@ -109,20 +105,23 @@ const closePopupOnEscButton = function (evt) {
   }
 };
 
+buttonProfileEdit.addEventListener('click', showUserInfoPopup);
+
 //заполнение полей формы при открытии "ред-ть профиль"
 function showUserInfoPopup() {
   inputUser.value = profileUser.textContent;
-  inputDescription.value = profileDescription.textContent;
+  inputDescription.value = profileDescription.textContent;  
   openPopup(popupProfile);
 }
 
-
+//отправка формы
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileUser.textContent = inputUser.value;
   profileDescription.textContent = inputDescription.value;
   closePopup(popupProfile);
 }
+
 
 //поля формы новой карточки
 popupAddForm.addEventListener('submit', e => {
@@ -135,6 +134,7 @@ popupAddForm.addEventListener('submit', e => {
   // Очищаем поля popup
   popupAddForm.reset();
   // Закрываем popup
+  
   closePopup(popupAdd);
 });
 
@@ -173,9 +173,8 @@ function createCard(name, link) {
 const addCard = function (name, link) {
   const card = createCard(name, link);
   cardsList.prepend(card);
+  submitButton.classList.add("popup__button_disabled");
 };
-
-
 
 //заполнение начальной страницы
 function initializeCards(arr) {
@@ -185,14 +184,23 @@ function initializeCards(arr) {
 }
 initializeCards(initialCards);
 
-
 //submit
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 //открыть ред-е профиля
 buttonProfileEdit.addEventListener('click', showUserInfoPopup);
 
+
 //открыть добавление карточки
 buttonPopupAdd.addEventListener('click', () => {
   openPopup(popupAdd);
 });
+
+const config = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.button_type_submit',
+    inactiveButtonClass: 'button_type_submit_inactive',
+    inputErrorClass: 'popup__error',
+    errorClass: 'popup__error_visible'
+}

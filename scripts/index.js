@@ -29,12 +29,12 @@ const initialCards = [
 //кнопки popup
 const profile = document.querySelector('.profile');
 const buttonProfileEdit = document.querySelector('.button_type_edit');
-const popupProfile = document.querySelector('.popup_type_edit');
-const buttonProfileClose = popupProfile.querySelector('.button_type_close');
-const submitButton = popupProfile.querySelector('.button_type_submit');
+const popupProfileEdit = document.querySelector('.popup_type_edit');
+const buttonProfileClose = popupProfileEdit.querySelector('.button_type_close');
+
 
 // формы заполнения данных popup
-const profileForm = popupProfile.querySelector('.popup__form');
+const profileForm = popupProfileEdit.querySelector('.popup__form');
 const inputUser = profileForm.querySelector('.popup__input_type_user');
 const inputDescription = profileForm.querySelector('.popup__input_type_description');
 
@@ -43,13 +43,14 @@ const profileUser = profile.querySelector('.profile__user');
 const profileDescription = profile.querySelector('.profile__description');
 
 //карточки и шаблон
-const cardsList = document.querySelector('.cards');
+const cardList = document.querySelector('.cards');
 const templateElement = document.querySelector('.elements');
 
 //добавить карточку
 const popupAdd = document.querySelector('.popup_type_add');
 const buttonPopupAdd = document.querySelector('.button_type_add');
 const buttonPopupClose = popupAdd.querySelector('.button_type_close');
+const buttonSubmitAdd = popupAdd.querySelector('.popup__button_add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
@@ -111,7 +112,7 @@ buttonProfileEdit.addEventListener('click', showUserInfoPopup);
 function showUserInfoPopup() {
   inputUser.value = profileUser.textContent;
   inputDescription.value = profileDescription.textContent;  
-  openPopup(popupProfile);
+  openPopup(popupProfileEdit);  
 }
 
 //отправка формы
@@ -119,7 +120,7 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileUser.textContent = inputUser.value;
   profileDescription.textContent = inputDescription.value;
-  closePopup(popupProfile);
+  closePopup(popupProfileEdit);
 }
 
 
@@ -136,7 +137,12 @@ popupAddForm.addEventListener('submit', e => {
   // Закрываем popup
   
   closePopup(popupAdd);
+
+ 
+  
 });
+
+
 
 
 //создать новую карточку
@@ -172,8 +178,7 @@ function createCard(name, link) {
 //добавить карточку
 const addCard = function (name, link) {
   const card = createCard(name, link);
-  cardsList.prepend(card);
-  submitButton.classList.add("popup__button_disabled");
+  cardList.prepend(card);
 };
 
 //заполнение начальной страницы
@@ -194,6 +199,8 @@ buttonProfileEdit.addEventListener('click', showUserInfoPopup);
 //открыть добавление карточки
 buttonPopupAdd.addEventListener('click', () => {
   openPopup(popupAdd);
+  buttonSubmitAdd.classList.add('button_type_submit_inactive');
+  buttonSubmitAdd.disabled = true;
 });
 
 const config = {

@@ -1,8 +1,12 @@
 .form {
+  width: 358px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 358px;
+  margin: auto;
+}
+
+.form:last-of-type {  
+  padding-bottom: 31px;
 }
 
 @media (max-width: 865px) and (min-width: 320px) {

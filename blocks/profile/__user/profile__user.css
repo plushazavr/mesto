@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 767px) and (min-width: 320px) {
+@media (max-width: 917px) and (min-width: 320px) {
   .profile__user {
     font-size: 27px;
     line-height: 33px;

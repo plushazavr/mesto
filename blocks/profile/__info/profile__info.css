@@ -7,10 +7,12 @@
 
 
 
-@media (max-width: 917px) and (min-width: 320px) {
+@media (max-width: 1045px) and (min-width: 320px) {
   .profile__info {
     width: 100%;
     flex-direction: column;
     align-content: center;
   }
 } 
+
+

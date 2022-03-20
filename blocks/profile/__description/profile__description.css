@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 917px) and (min-width: 320px) {
+@media (max-width: 1045px) and (min-width: 320px) {
   .profile__description {
     margin: 0;
     font-size: 14px;

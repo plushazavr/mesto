@@ -12,11 +12,22 @@
   line-height: 17px;
 }
 
-.popup__input:last-of-type {
-}
-
-@media (max-width: 865px) and (min-width: 320px) {
+/*
+@media screen and (max-width: 1140px) {
   .popup__input {
-    max-width: 238px;
+    width: 320px;
   }
 }
+
+@media screen and (max-width: 984px) {
+  .popup__input {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .popup__input {
+    width: 238px;
+    margin: 0 auto;
+  }
+}*/

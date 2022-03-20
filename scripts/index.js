@@ -31,7 +31,7 @@ const profile = document.querySelector('.profile');
 const buttonProfileEdit = document.querySelector('.button_type_edit');
 const popupProfileEdit = document.querySelector('.popup_type_edit');
 const buttonProfileClose = popupProfileEdit.querySelector('.button_type_close');
-
+const buttonSubmitEdit = document.querySelector('.button_type_submit-edit');
 
 // формы заполнения данных popup
 const profileForm = popupProfileEdit.querySelector('.popup__form');
@@ -69,36 +69,37 @@ function removeEventListenerEscape() {
   document.removeEventListener('keydown', closePopupOnEscButton);
 }
 
-
-//открыть popup
+// Функции.
+//Открытие popup.
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  addEventListenerEscape();
+  document.addEventListener('keydown', closePopupOnEscButton);
 }
 
-//закрыть popup
+// Закрытие popup.
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  removeEventListenerEscape();
+  document.removeEventListener('keydown', closePopupOnEscButton);
 }
 
-//нажатие на всех popup
+// Функция обрабатывает нажатие клик по оверлею или крестику на любом попапе
 function addListenerCloseButtonClick() {
-  //все popup
+  // Добавим  обработчики события
   const popups = document.querySelectorAll('.popup');
-  //закрытие по нажатию на крестик и оверлей
   popups.forEach(popup => {
       popup.addEventListener('click', (event) => {
-        if (event.target === event.currentTarget || event.target.classList.contains('button_type_close')) {
+          if (!(event.target === event.currentTarget || event.target.classList.contains('button_type_close'))) {
+              return;
+          }
+          // Если событие произошло вызываем закрывающую функцию
           closePopup(popup);
-        }
       });
   });
 }
 
 addListenerCloseButtonClick();
 
-//закрытие popup на esc
+// закрытие по нажатию кнопки Escape
 const closePopupOnEscButton = function (evt) {
   if (evt.key === "Escape") {
       const openedPopup = document.querySelector('.popup_opened');
@@ -106,108 +107,98 @@ const closePopupOnEscButton = function (evt) {
   }
 };
 
-buttonProfileEdit.addEventListener('click', showUserInfoPopup);
-
-//заполнение полей формы при открытии "ред-ть профиль"
+//При открытии popup профиля, значения полей формы ввода заполняются из профиля.
 function showUserInfoPopup() {
   inputUser.value = profileUser.textContent;
-  inputDescription.value = profileDescription.textContent;  
-  openPopup(popupProfileEdit);  
+  inputDescription.value = profileDescription.textContent;
+  openPopup(popupProfileEdit);
+  buttonSubmitEdit.classList.remove(config.inactiveButtonClass);
+  buttonSubmitEdit.disabled = false;
 }
 
-//отправка формы
-function handleProfileFormSubmit(evt) {
+// Отправка формы (без отправки в настоящее время).
+function fillSubmitHandler(evt) {
+  // Отмена стандартной отправки формы.
   evt.preventDefault();
+  // Присвоение значений в профиле равных значения в popup с помощью textContent.
   profileUser.textContent = inputUser.value;
   profileDescription.textContent = inputDescription.value;
+  // Закрываем popup
   closePopup(popupProfileEdit);
 }
 
-
-//поля формы новой карточки
-popupAddForm.addEventListener('submit', e => {
+// Заполнение полей формы новой карточки popupAdd
+function handleCardFormSubmit(e) {
   e.preventDefault();
   const name = popupAddTitle.value;
   const link = popupAddLink.value;
-  
   // Добавляем в  карточку  в начало
   addCard(name, link);
   // Очищаем поля popup
   popupAddForm.reset();
   // Закрываем popup
-  
   closePopup(popupAdd);
+  // Делаем неактивной кнопку добавления карточки при повторном открытии
+  buttonSubmitAdd.classList.add(config.inactiveButtonClass);
+  buttonSubmitAdd.setAttribute('disabled', '');
+};
+popupAddForm.addEventListener('submit', handleCardFormSubmit)
 
- 
-  
-});
-
-
-
-
-//создать новую карточку
+// Создание карточки.
 function createCard(name, link) {
   const card = templateElement.content.cloneNode(true);
-  const elementImg = card.querySelector('.element__image');
+  const cardImage = card.querySelector('.element__image');
   card.querySelector('.element__title').textContent = name;
-  elementImg.src = link;
-  elementImg.alt = name;
+  cardImage.alt = name;
+  cardImage.src = link;
   // Лайк
   card.querySelector('.button_type_like').addEventListener('click', function (evt) {
       evt.target.classList.toggle('button_type_like_active');
   });
 
-  //удалить карточку
+  // Удаление
   card.querySelector('.button_type_delete').addEventListener('click', function (evt) {
       const removeCard = evt.target.closest('.element');
       removeCard.remove();
   });
 
-  //посмотреть фото
-  function handleImageClick() {
-      popupImgPhoto.src = link;
-      popupImgText.textContent = name;
-      popupImgPhoto.alt = name;
-      openPopup(popupImage);
-  }
-
-  elementImg.addEventListener('click', handleImageClick);
+  card.querySelector('.element__image').addEventListener('click', () => clickImageHandler(name, link));
   return card;
 }
 
-//добавить карточку
+// Открытие popup показа фотографий.
+function clickImageHandler(name, link) {
+  popupImgPhoto.src = link;
+  popupImgPhoto.alt = name;
+  popupImgText.textContent = name;
+  openPopup(popupImage);
+};
+
+
+// Добавление карточки.
 const addCard = function (name, link) {
   const card = createCard(name, link);
   cardList.prepend(card);
 };
 
-//заполнение начальной страницы
+//Заполнение начальной страницы 6-ю карточками.
 function initializeCards(arr) {
   arr.forEach((item) => {
       addCard(item.name, item.link, item.alt);
   });
 }
+
+// Запускаем заполнение начальной страницы
 initializeCards(initialCards);
 
-//submit
-profileForm.addEventListener('submit', handleProfileFormSubmit);
+// Прикрепляем обработчик к форме.
+// он будет следить за событием “submit” - «отправка».
+profileForm.addEventListener('submit', fillSubmitHandler);
 
-//открыть ред-е профиля
+// Обработка события открытия popup редактирования профиля и его заполнения данным из профиля.
 buttonProfileEdit.addEventListener('click', showUserInfoPopup);
 
-
-//открыть добавление карточки
+// Обработка события открытия popup добавления карточки.
 buttonPopupAdd.addEventListener('click', () => {
   openPopup(popupAdd);
-  buttonSubmitAdd.classList.add('button_type_submit_inactive');
-  buttonSubmitAdd.disabled = true;
 });
-
-const config = {
-    formSelector: '.popup__form',
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.button_type_submit',
-    inactiveButtonClass: 'button_type_submit_inactive',
-    inputErrorClass: 'popup__error',
-    errorClass: 'popup__error_visible'
-}

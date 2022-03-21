@@ -35,6 +35,6 @@
 @media (max-width: 568px) {
   .button_type_submit {
     width: 238px;
-    margin-top: 15px;
+    margin-top: 0px;
   }
 }

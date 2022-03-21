@@ -29,5 +29,6 @@
 @media (max-width: 568px) {
   .form {
     width: 238px;
+    height: 40px;
   }
 }

@@ -1,4 +1,4 @@
-import {Card, popupImage, popupImgPhoto, popupImgText} from '../scripts/Card.js';
+import { Card } from '../scripts/Card.js';
 import FormValidator from '../scripts/FormValidator.js';
 
 //карточки "коробки"
@@ -42,8 +42,6 @@ const config = {
 const profile = document.querySelector('.profile');
 const buttonProfileEdit = document.querySelector('.button_type_edit');
 const popupProfileEdit = document.querySelector('.popup_type_edit');
-const buttonProfileClose = popupProfileEdit.querySelector('.button_type_close');
-const buttonSubmitEdit = document.querySelector('.button_type_submit-edit');
 
 // формы заполнения данных popup
 const profileForm = popupProfileEdit.querySelector('.popup__form');
@@ -56,13 +54,10 @@ const profileDescription = profile.querySelector('.profile__description');
 
 //карточки и шаблон
 const cardList = document.querySelector('.cards');
-const templateElement = document.querySelector('.elements');
 
 //добавить карточку
 const popupAdd = document.querySelector('.popup_type_add');
 const buttonPopupAdd = document.querySelector('.button_type_add');
-const buttonPopupClose = popupAdd.querySelector('.button_type_close');
-const buttonSubmitAdd = popupAdd.querySelector('.button_type_submit-add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');

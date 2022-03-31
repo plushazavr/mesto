@@ -1,4 +1,4 @@
-import {openPopup} from '../scripts/index.js';
+import { openPopup } from '../scripts/index.js';
 
 // popup "просмотр фото"
 export const popupImage = document.querySelector('.popup_type_open-image');

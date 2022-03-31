@@ -8,6 +8,8 @@ export default class FormValidator {
 
   // Устанавливаем слушатели
   _setEventListeners() {
+    this._hasInvalidInput();
+    this._toggleButtonState();
     // Обойдём все элементы полученной коллекции
     this._inputList.forEach((inputElement) => {
         // каждому полю добавим обработчик события input
@@ -15,14 +17,15 @@ export default class FormValidator {
             // Внутри колбэка вызовем checkInputValidity
             this._checkInputValidity(inputElement);
             // Вызовем toggleButtonState
-            this._toggleButtonState();
+            this._toggleButtonState(this._inputList);
         });
     });
   }
 
+
   //сбросить ошибки и submit неактивный
   resetValidation() {
-    this._toggleButtonState();
+    this._toggleButtonState(this._inputList);
     this._inputList.forEach((inputElement) => {
         this._hideError(inputElement);
     });
@@ -69,9 +72,9 @@ export default class FormValidator {
 
   // Проверяет все входы формы на валидность, чтобы предотвратить отправку,
   // если какой-либо из них не валиден
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     // проходим по этому массиву методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
         // Если поле не валидно, колбэк вернёт true  обход массива прекратится и вся функция
         // hasInvalidInput вернёт true
         return !inputElement.validity.valid;
@@ -84,11 +87,11 @@ export default class FormValidator {
     // Если есть хотя бы один невалидный инпут
     if (this._hasInvalidInput(this._inputList)) {
         // сделай кнопку неактивной
-        this._buttonElement.classList.add(this._inactiveButtonClass);
+        this._buttonElement.classList.add(this._data.inactiveButtonClass);
         this._buttonElement.disabled = true;
     } else {
         // иначе сделай кнопку активной
-        this._buttonElement.classList.remove(this._inactiveButtonClass);
+        this._buttonElement.classList.remove(this._data.inactiveButtonClass);
         this._buttonElement.disabled = false;
     }
   };

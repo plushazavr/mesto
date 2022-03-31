@@ -1,3 +1,6 @@
+import {Card, popupImage, popupImgPhoto, popupImgText} from '../scripts/Card.js';
+import FormValidator from '../scripts/FormValidator.js';
+
 //карточки "коробки"
 const initialCards = [
   {
@@ -25,6 +28,15 @@ const initialCards = [
     link: 'images/dog-7.jpg'
   }
 ];
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.button_type_submit',
+  inactiveButtonClass: 'button_type_submit_inactive',
+  inputErrorClass: 'popup__error',
+  errorClass: 'popup__error_visible'
+};
 
 //кнопки popup
 const profile = document.querySelector('.profile');
@@ -56,22 +68,22 @@ const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
 
 //посмотреть фото
-const popupImage = document.querySelector('.popup_type_open-image');
+/*const popupImage = document.querySelector('.popup_type_open-image');
 const popupImgText = popupImage.querySelector('.popup__image-title');
 const popupImgPhoto = popupImage.querySelector('.popup__image');
-const buttonPopupImgClose = popupImage.querySelector('.button_type_close');
+const buttonPopupImgClose = popupImage.querySelector('.button_type_close');*/
 
-function addEventListenerEscape() {
-  document.addEventListener('keydown', closePopupOnEscButton);
-}
+// Создаем экземпляр класса для формы редактирования профиля
+const profileFormValidator = new FormValidator(config, popupProfileEdit);
+profileFormValidator.enableValidation();
+// Создаем экземпляр класса для формы добавления карточки
+const addFormValidator = new FormValidator(config, popupAdd);
+addFormValidator.enableValidation();
 
-function removeEventListenerEscape() {
-  document.removeEventListener('keydown', closePopupOnEscButton);
-}
+// Функции
 
-// Функции.
 //Открытие popup.
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEscButton);
 }
@@ -112,8 +124,11 @@ function showUserInfoPopup() {
   inputUser.value = profileUser.textContent;
   inputDescription.value = profileDescription.textContent;
   openPopup(popupProfileEdit);
-  buttonSubmitEdit.classList.remove(config.inactiveButtonClass);
-  buttonSubmitEdit.disabled = false;
+  /*buttonSubmitEdit.classList.remove(config.inactiveButtonClass);
+  buttonSubmitEdit.disabled = false;*/
+
+  //При повторном открытии, после закрытия установим состояние кнопки
+  profileFormValidator.resetValidation();
 }
 
 // Отправка формы (без отправки в настоящее время).
@@ -127,69 +142,58 @@ function fillSubmitHandler(evt) {
   closePopup(popupProfileEdit);
 }
 
+//Создание карточки.
+function createCard(item) {
+  const card = new Card({
+    name: item.name,
+    link: item.link,
+    alt: `Изображение ${item.name}`
+  },
+  '.elements');
+  const cardImage = card.generateCard();
+  return cardImage;
+}
+
+// Функция добавления карточки на страницу в начало
+const insertCard = (card) => {
+  cardList.prepend(createCard(card));
+};
+
 // Заполнение полей формы новой карточки popupAdd
 function handleCardFormSubmit(e) {
   e.preventDefault();
-  const name = popupAddTitle.value;
+  const cardsData = {
+    link: popupAddLink.value,
+    name: popupAddTitle.value,
+    alt: `Изображение ${popupAddTitle.value}`
+  };
+  insertCard(cardsData);
+  /*const name = popupAddTitle.value;
   const link = popupAddLink.value;
   // Добавляем в  карточку  в начало
-  addCard(name, link);
+  addCard(name, link);*/
+
   // Очищаем поля popup
   popupAddForm.reset();
   // Закрываем popup
   closePopup(popupAdd);
   // Делаем неактивной кнопку добавления карточки при повторном открытии
-  buttonSubmitAdd.classList.add(config.inactiveButtonClass);
-  buttonSubmitAdd.setAttribute('disabled', '');
+  /*buttonSubmitAdd.classList.add(config.inactiveButtonClass);
+  buttonSubmitAdd.setAttribute('disabled', '');*/
+  addFormValidator.resetValidation();
 };
-popupAddForm.addEventListener('submit', handleCardFormSubmit)
+popupAddForm.addEventListener('submit', handleCardFormSubmit);
 
-// Создание карточки.
-function createCard(name, link) {
-  const card = templateElement.content.cloneNode(true);
-  const cardImage = card.querySelector('.element__image');
-  card.querySelector('.element__title').textContent = name;
-  cardImage.alt = name;
-  cardImage.src = link;
-  // Лайк
-  card.querySelector('.button_type_like').addEventListener('click', function (evt) {
-      evt.target.classList.toggle('button_type_like_active');
-  });
+// Прикрепляем обработчик к форме.
+// он будет следить за событием “submit” - «отправка».
+profileForm.addEventListener('submit', fillSubmitHandler);
 
-  // Удаление
-  card.querySelector('.button_type_delete').addEventListener('click', function (evt) {
-      const removeCard = evt.target.closest('.element');
-      removeCard.remove();
-  });
-
-  card.querySelector('.element__image').addEventListener('click', () => clickImageHandler(name, link));
-  return card;
-}
-
-// Открытие popup показа фотографий.
-function clickImageHandler(name, link) {
-  popupImgPhoto.src = link;
-  popupImgPhoto.alt = name;
-  popupImgText.textContent = name;
-  openPopup(popupImage);
-};
-
-
-// Добавление карточки.
-const addCard = function (name, link) {
-  const card = createCard(name, link);
-  cardList.prepend(card);
-};
-
-//Заполнение начальной страницы 6-ю карточками.
-function initializeCards(arr) {
-  arr.forEach((item) => {
-      addCard(item.name, item.link, item.alt);
-  });
-}
-
-// Запускаем заполнение начальной страницы
-initializeCards(initialCards);
+// Обработка события открытия popup редактирования профиля и его заполнения данным из профиля.
+buttonProfileEdit.addEventListener('click', function () {
+  profileFormValidator.resetValidation();
+  openPopup(popupProfileEdit);
+  showUserInfoPopup();
+});
 
 // Прикрепляем обработчик к форме.
 // он будет следить за событием “submit” - «отправка».
@@ -201,4 +205,9 @@ buttonProfileEdit.addEventListener('click', showUserInfoPopup);
 // Обработка события открытия popup добавления карточки.
 buttonPopupAdd.addEventListener('click', () => {
   openPopup(popupAdd);
+});
+
+// Вставляе карточки при первой загрузке.
+initialCards.forEach((item) => {
+  insertCard(item);
 });

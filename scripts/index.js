@@ -67,12 +67,6 @@ const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
 
-//посмотреть фото
-/*const popupImage = document.querySelector('.popup_type_open-image');
-const popupImgText = popupImage.querySelector('.popup__image-title');
-const popupImgPhoto = popupImage.querySelector('.popup__image');
-const buttonPopupImgClose = popupImage.querySelector('.button_type_close');*/
-
 // Создаем экземпляр класса для формы редактирования профиля
 const profileFormValidator = new FormValidator(config, popupProfileEdit);
 profileFormValidator.enableValidation();
@@ -80,30 +74,26 @@ profileFormValidator.enableValidation();
 const addFormValidator = new FormValidator(config, popupAdd);
 addFormValidator.enableValidation();
 
-// Функции
-
-//Открытие popup.
+//Открытие popup
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEscButton);
 }
 
-// Закрытие popup.
+// Закрытие popup
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupOnEscButton);
 }
 
-// Функция обрабатывает нажатие клик по оверлею или крестику на любом попапе
+// Функция обрабатывает клик по оверлею или крестику на любом попапе
 function addListenerCloseButtonClick() {
-  // Добавим  обработчики события
   const popups = document.querySelectorAll('.popup');
   popups.forEach(popup => {
       popup.addEventListener('click', (event) => {
           if (!(event.target === event.currentTarget || event.target.classList.contains('button_type_close'))) {
               return;
           }
-          // Если событие произошло вызываем закрывающую функцию
           closePopup(popup);
       });
   });
@@ -119,26 +109,19 @@ const closePopupOnEscButton = function (evt) {
   }
 };
 
-//При открытии popup профиля, значения полей формы ввода заполняются из профиля.
+//При открытии popup профиля, значения полей формы ввода заполняются из профиля
 function showUserInfoPopup() {
   inputUser.value = profileUser.textContent;
   inputDescription.value = profileDescription.textContent;
   openPopup(popupProfileEdit);
-  /*buttonSubmitEdit.classList.remove(config.inactiveButtonClass);
-  buttonSubmitEdit.disabled = false;*/
-
-  //При повторном открытии, после закрытия установим состояние кнопки
   profileFormValidator.resetValidation();
 }
 
 // Отправка формы (без отправки в настоящее время).
 function fillSubmitHandler(evt) {
-  // Отмена стандартной отправки формы.
   evt.preventDefault();
-  // Присвоение значений в профиле равных значения в popup с помощью textContent.
   profileUser.textContent = inputUser.value;
   profileDescription.textContent = inputDescription.value;
-  // Закрываем popup
   closePopup(popupProfileEdit);
 }
 
@@ -159,7 +142,7 @@ const insertCard = (card) => {
   cardList.prepend(createCard(card));
 };
 
-// Заполнение полей формы новой карточки popupAdd
+// Заполнение полей формы новой карточки
 function handleCardFormSubmit(e) {
   e.preventDefault();
   const cardsData = {
@@ -168,36 +151,21 @@ function handleCardFormSubmit(e) {
     alt: `Изображение ${popupAddTitle.value}`
   };
   insertCard(cardsData);
-  /*const name = popupAddTitle.value;
-  const link = popupAddLink.value;
-  // Добавляем в  карточку  в начало
-  addCard(name, link);*/
-
-  // Очищаем поля popup
   popupAddForm.reset();
-  // Закрываем popup
   closePopup(popupAdd);
-  // Делаем неактивной кнопку добавления карточки при повторном открытии
-  /*buttonSubmitAdd.classList.add(config.inactiveButtonClass);
-  buttonSubmitAdd.setAttribute('disabled', '');*/
   addFormValidator.resetValidation();
 };
 popupAddForm.addEventListener('submit', handleCardFormSubmit);
 
-// Прикрепляем обработчик к форме.
-// он будет следить за событием “submit” - «отправка».
+// Прикрепляем обработчик к форме
 profileForm.addEventListener('submit', fillSubmitHandler);
 
-// Обработка события открытия popup редактирования профиля и его заполнения данным из профиля.
+// Обработка события открытия popup редактирования профиля и его заполнения данным из профиля
 buttonProfileEdit.addEventListener('click', function () {
   profileFormValidator.resetValidation();
   openPopup(popupProfileEdit);
   showUserInfoPopup();
 });
-
-// Прикрепляем обработчик к форме.
-// он будет следить за событием “submit” - «отправка».
-profileForm.addEventListener('submit', fillSubmitHandler);
 
 // Обработка события открытия popup редактирования профиля и его заполнения данным из профиля.
 buttonProfileEdit.addEventListener('click', showUserInfoPopup);

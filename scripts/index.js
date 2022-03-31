@@ -30,14 +30,14 @@ const initialCards = [
 ];
 
 const config = {
-  /*popupForm: '.form',*/
+  popupForm: '.form',
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.button_type_submit',
   inactiveButtonClass: 'button_type_submit_inactive',
-  inputErrorClass: 'popup__error',
+  inputErrorClass: '.popup__error',
   errorClass: 'popup__error_visible',
-  /*formErrorClass: 'form__input_error'*/
+  formErrorClass: 'form__input_error'
 };
 
 //кнопки popup
@@ -87,7 +87,7 @@ function closePopup(popup) {
 function addListenerCloseButtonClick() {
   const popups = document.querySelectorAll('.popup');
   popups.forEach(popup => {
-      popup.addEventListener('click', (event) => {
+      popup.addEventListener('mousedown', (event) => {
           if (!(event.target === event.currentTarget || event.target.classList.contains('button_type_close'))) {
               return;
           }
@@ -115,7 +115,7 @@ function showUserInfoPopup() {
 }
 
 // Отправка формы (без отправки в настоящее время).
-function fillSubmitHandler(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileUser.textContent = inputUser.value;
   profileDescription.textContent = inputDescription.value;
@@ -155,7 +155,7 @@ function handleCardFormSubmit(e) {
 popupAddForm.addEventListener('submit', handleCardFormSubmit);
 
 // Прикрепляем обработчик к форме
-profileForm.addEventListener('submit', fillSubmitHandler);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 // Обработка события открытия popup редактирования профиля и его заполнения данным из профиля
 buttonProfileEdit.addEventListener('click', function () {
@@ -173,6 +173,4 @@ buttonPopupAdd.addEventListener('click', () => {
 });
 
 // Вставляе карточки при первой загрузке.
-initialCards.forEach((item) => {
-  insertCard(item);
-});
+initialCards.forEach(insertCard);

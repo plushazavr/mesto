@@ -40,14 +40,14 @@ export default class FormValidator {
   //для поиска нужного input вместо id
   _getErrorElement = (inputElement) => {
     return inputElement
-      .closest('.form')
-      .querySelector('.popup__error')
+      .closest(this._data.popupForm)
+      .querySelector(this._data.inputErrorClass)
   }
 
   // Добавляет класс с ошибкой и текст ошибки
   _showError = (inputElement, errorMessage) => {
     const errorElement = this._getErrorElement(inputElement);
-    inputElement.classList.add('form__input_error');
+    inputElement.classList.add(this._data.formErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._data.errorClass);
   };
@@ -55,7 +55,7 @@ export default class FormValidator {
     // Удаляет класс с ошибкой.
     _hideError = (inputElement) => {
       const errorElement = this._getErrorElement(inputElement);
-      inputElement.classList.remove('form__input_error');
+      inputElement.classList.remove(this._data.formErrorClass);
       errorElement.classList.remove(this._data.errorClass);
       errorElement.textContent = '';
     };

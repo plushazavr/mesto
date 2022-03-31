@@ -33,15 +33,16 @@ export class Card {
   generateCard() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector('.button_type_like');
+    this._cardImage = this._element.querySelector('.element__image');
     this._setEventListeners();
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__image').alt = this._alt;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._alt;
     this._element.querySelector('.element__title').textContent = this._name;
     return this._element;
   }
 
-// посмотреть фото
-_clickImageHandler() {
+// посмотреть фото 
+_handleImageClick() {
   popupImgPhoto.src = this._link;
   popupImgPhoto.alt = this._name;
   popupImgText.textContent = this._name;
@@ -51,8 +52,8 @@ _clickImageHandler() {
   //слушатели
   _setEventListeners() {
     // посмотреть фото
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-        this._clickImageHandler();
+    this._cardImage.addEventListener('click', () => {
+        this._handleImageClick();
     });
 
     // удаление

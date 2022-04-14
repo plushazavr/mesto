@@ -1,0 +1,40 @@
+.button_type_submit {  
+  padding: 0;
+  width: 358px;
+  height: 50px;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  border: none;
+  opacity: 1;
+}
+
+.button_type_submit:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 1140px) {
+  .button_type_submit {
+    width: 320px;
+  }
+}
+
+@media (max-width: 984px) {
+  .button_type_submit {
+    width: 300px;
+    height: 46px;
+    font-size: 14px;
+    line-height: 1.21;
+  }
+}
+
+@media (max-width: 568px) {
+  .button_type_submit {
+    width: 238px;
+    margin-top: 0px;
+  }
+}

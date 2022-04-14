@@ -1,0 +1,34 @@
+.form {
+  margin: 0;
+  width: 100%;
+  height: 45px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form:first-of-type {
+  margin-bottom: 28px;
+}
+
+.form:last-of-type {
+  margin-bottom: 31px;
+}
+
+@media screen and (max-width: 1140px) {
+  .form {
+    width: 320px;
+  }
+}
+
+@media (max-width: 984px) {
+  .form {
+    width: 300px;
+  }
+}
+
+@media (max-width: 568px) {
+  .form {
+    width: 238px;
+    height: 40px;
+  }
+}

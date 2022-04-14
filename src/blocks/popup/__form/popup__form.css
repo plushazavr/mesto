@@ -1,0 +1,35 @@
+.popup__form {
+  /*display: flex;
+  flex-direction: column;
+  align-items: center;*/
+  margin: 0;
+  width: 358px;
+  margin-left: 36px;
+  margin-right: 36px;
+}
+
+
+
+@media screen and (max-width: 1140px) {
+  .popup__form {
+    width: 320px;
+    margin-left: 36px;
+    margin-right: 36px;
+  }
+}
+
+@media (max-width: 984px) {
+  .popup__form {
+    width: 300px;
+    margin-left: 36px;
+    margin-right: 36px;
+  }
+}
+
+@media (max-width: 568px) {
+  .popup__form {
+    width: 238px;
+    margin-left: 22px;
+    margin-right: 22px;
+  }
+}

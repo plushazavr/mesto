@@ -1,0 +1,24 @@
+.button_type_edit {
+  margin: 0;
+  padding: 0;
+  margin-left: 18px;
+  width: 24px;
+  height: 24px;
+  border: white solid 1px;
+  background-image: url(../../../images/edit-profile.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+.button_type_edit:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .button_type_edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+  }
+} 

@@ -1,6 +1,0 @@
-.popup_type_open-image {
-  display: flex;
-  flex-direction: column;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1;
-}

@@ -6,6 +6,108 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(this._data.submitButtonSelector);
   }
 
+  // Устанавливаем слушатели
+  _setEventListeners() {
+    // Обойдём все элементы полученной коллекции
+    this._inputList.forEach((inputElement) => {
+        // каждому полю добавим обработчик события input
+        inputElement.addEventListener('input', () => {
+            // Внутри колбэка вызовем isValid
+            this._isValid(inputElement);
+            // Вызовем toggleButtonState
+            this._toggleButtonState();
+        });
+    });
+  }
+
+  // Сбросим ошибки и приведем кнопку в неактивное состояние
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+        this._hideInputError(inputElement);
+    });
+  }
+
+  // Проверяет валидность поля, принимает inputElement — проверяемое поле ввода.
+  _isValid = (inputElement) => {
+    if (!inputElement.validity.valid) {
+        //showInputError получает параметром форму, в которой находится проверяемое поле
+        this._showInputError(inputElement, inputElement.validationMessage);
+    } else {
+        // Если проходит, скроем
+        this._hideInputError(inputElement);
+    }
+  }
+
+   //для поиска нужного input вместо id
+  _getErrorElement = (inputElement) => {
+    return inputElement
+      .closest(this._data.popupForm)
+      .querySelector(this._data.inputErrorClass)
+  }
+
+  // Добавляет класс с ошибкой. Передаем текст ошибки вторым параметром.
+  _showInputError = (inputElement, errorMessage) => {
+    // Находим элемент ошибки внутри самой функции
+    const errorElement = this._getErrorElement(inputElement);
+    inputElement.classList.add(this._data.formErrorClass);
+    // Заменим содержимое span с ошибкой на переданный параметр
+    errorElement.textContent = errorMessage;
+    // Показываем сообщение об ошибке
+    errorElement.classList.add(this._data.errorClass);
+  }
+
+   // Удаляет класс с ошибкой.
+  _hideInputError = (inputElement) => {
+    // Находим элемент ошибки
+    const errorElement = this._getErrorElement(inputElement);
+    inputElement.classList.remove(this._data.formErrorClass);
+    // Скрываем сообщение об ошибке
+    errorElement.classList.remove(this._data.errorClass);
+    // Очистим ошибку
+    errorElement.textContent = '';
+  }
+
+  // Проверяет все входы формы на валидность, чтобы предотвратить отправку,
+    // если какой-либо из них не валиден
+  _hasInvalidInput = (inputList) => {
+      // проходим по этому массиву методом some
+    return inputList.some((inputElement) => {
+          // Если поле не валидно, колбэк вернёт true  обход массива прекратится и вся функция
+          // hasInvalidInput вернёт true
+         return !inputElement.validity.valid;
+      });
+  }
+
+  // Принимает массив полей ввода и элемент кнопки, состояние которой нужно менять.
+    // Отключает или включает видимое состояние кнопки
+  _toggleButtonState = () => {
+      // Если есть хотя бы один невалидный инпут
+    if (this._hasInvalidInput(this._inputList)) {
+        this._buttonElement.setAttribute("disabled", true);
+        this._buttonElement.classList.add(this._data.inactiveButtonClass);
+    } else {
+        this._buttonElement.removeAttribute("disabled");
+        this._buttonElement.classList.remove(this._data.inactiveButtonClass);
+    }
+  }
+
+  // Вызов функции валидации
+  enableValidation() {
+    this._setEventListeners();
+}
+}
+
+
+
+/*export default class FormValidator {
+  constructor(data, formElement) {
+    this._data = data;
+    this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._data.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._data.submitButtonSelector);
+  }
+
   // Устанавливаем слушателя
   _setEventListeners() {
     //валидность submit до ввода данных
@@ -82,4 +184,4 @@ export default class FormValidator {
     enableValidation() {
       this._setEventListeners();
   }
-}
+}*/

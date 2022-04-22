@@ -1,79 +1,106 @@
 import '../pages/index.css';
 
-import { Card } from '../components/Card.js';
-import FormValidator from '../scripts/FormValidator.js';
+// Импорт необходимых компонентов
+import FormValidator from '../components/FormValidator.js';
+import Card from '../components/Card.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import UserInfo from '../components/UserInfo.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import { initialCards} from '../utils/initialCards.js';
+import {
+  config,
+  inputDescription,
+  inputUser,
+  buttonPopupAdd,
+  popupAdd,
+  buttonProfileEdit,  
+  popupProfileEdit,
+} from '../utils/constants.js';
 
-//карточки "коробки"
-const initialCards = [
-  {
-    name: 'Зубатка',
-    link: 'https://i.pinimg.com/originals/ee/e7/94/eee79455b14006ae5fb0e73e85a42077.jpg'
-  },
-  {
-    name: 'Лежачий',
-    link: 'https://i.pinimg.com/originals/e3/37/2e/e3372ea57712e4772284982f9bae167c.jpg'
-  },
-  {
-    name: 'Почти котопес',
-    link: 'https://i.pinimg.com/originals/60/6d/27/606d27e0e32e2e2ffbae7b3080d3b600.jpg'
-  },
-  {
-    name: 'Возьми на постель',
-    link: 'https://i.pinimg.com/originals/8e/5a/c4/8e5ac45f7b5836898a6058f38f8d5cf5.jpg'
-  },
-  {
-    name: 'Дьявол',
-    link: 'https://i.pinimg.com/564x/da/19/f7/da19f7b6d4f306e00b07953249024183.jpg'
-  },
-  {
-    name: 'Я у мамы дурачок',
-    link: 'https://i.pinimg.com/originals/50/bd/bd/50bdbda668486184990c980e9d766bdc.jpg'
-  }
-];
 
-const config = {
-  popupForm: '.form',
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.button_type_submit',
-  inactiveButtonClass: 'button_type_submit_inactive',
-  inputErrorClass: '.popup__error',
-  errorClass: 'popup__error_visible',
-  formErrorClass: 'form__input_error'
-};
 
-//кнопки popup
-const profile = document.querySelector('.profile');
-const buttonProfileEdit = document.querySelector('.button_type_edit');
-const popupProfileEdit = document.querySelector('.popup_type_edit');
-
-// формы заполнения данных popup
+/*const profile = document.querySelector('.profile');
 const profileForm = popupProfileEdit.querySelector('.popup__form');
-const inputUser = profileForm.querySelector('.popup__input_type_user');
-const inputDescription = profileForm.querySelector('.popup__input_type_description');
-
-//переменные данных профиля
 const profileUser = profile.querySelector('.profile__user');
 const profileDescription = profile.querySelector('.profile__description');
-
-//карточки и шаблон
 const cardList = document.querySelector('.cards');
-
-//добавить карточку
-const popupAdd = document.querySelector('.popup_type_add');
-const buttonPopupAdd = document.querySelector('.button_type_add');
 const popupAddForm = popupAdd.querySelector('.popup__form');
 const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
+*/
 
-// Создаем экземпляр класса для формы редактирования профиля
-const profileFormValidator = new FormValidator(config, popupProfileEdit);
-profileFormValidator.enableValidation();
-// Создаем экземпляр класса для формы добавления карточки
-const addFormValidator = new FormValidator(config, popupAdd);
-addFormValidator.enableValidation();
+const profileValid = new FormValidator(config, popupProfileEdit);
+const addCardValid = new FormValidator(config, popupAdd);
 
-//Открытие popup
+const userInfo = new UserInfo({
+  name: '.profile__user',
+  info: '.profile__description',
+});
+const popupWithImage = new PopupWithImage('.popup_type_open-image');
+
+// Функция отрисовки карточки
+const createCard = (data) => {
+  const cardElement = new Card({
+      data: data,
+      handleCardClick: () => {
+          popupWithImage.open(data);
+      }
+  }, '.elements');
+  return cardElement.generateCard();
+};
+
+/*// Создание карточки 
+const createCard = (item) => {
+    const card = new Card(item, templateSelector, newPopupImage);
+    const cardElement = card.generateCard();
+    return cardElement;
+}*/
+
+// Создание карточек из массива initialCards
+const initialCardsList = new Section({
+  data: initialCards,
+  renderer: (element) => {
+      initialCardsList.addItem(createCard(element));
+  }
+}, '.cards');
+
+// Создание экземпляра класса popup с сохранением новых данных о пользователе в функции
+const popupEditProfile = new PopupWithForm('.popup_type_edit', (userData) => {
+  userInfo.setUserInfo(userData);
+});
+// const popupEditProfile = new PopupWithForm(popupProfile, (userData) => {
+//     userInfo.setUserInfo(userData);
+// });
+//Слушатель на кнопку открытия popup добавления фотографии
+buttonPopupAdd.addEventListener('click', () => {
+  addCardValid.resetValidation();
+  popupAddCard.open();
+});
+
+// Слушатель на кнопку открытия popup редактирования профиля
+buttonProfileEdit.addEventListener('click', () => {
+  const {name, info} = userInfo.getUserInfo();  
+  inputUser.value = name;
+  inputDescription.value = info;
+  popupEditProfile.open();
+  profileValid.resetValidation();
+});
+
+//Создание новой карточки из формы добавления
+const popupAddCard = new PopupWithForm('.popup_type_add', (values) => {
+  initialCardsList.addItem(createCard(values));
+  addCardValid.resetValidation();
+});
+
+initialCardsList.renderItems(); // Добавление первых 6-ти карточек на страницу
+popupWithImage.setEventListeners(); // Слушатель на закрытие открытой фотографии
+profileValid.enableValidation(); // Запуск валидации для формы редактирования профиля
+popupEditProfile.setEventListeners(); // Слушатель в форме редактирования профиля
+addCardValid.enableValidation(); // Запуск валидации для формы добавления карточки
+popupAddCard.setEventListeners(); // Слушатель в форме добавления карточки
+
+/*
 export function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', closePopupOnEscButton);
@@ -176,3 +203,4 @@ buttonPopupAdd.addEventListener('click', () => {
 
 // Вставляе карточки при первой загрузке.
 initialCards.forEach(insertCard);
+*/

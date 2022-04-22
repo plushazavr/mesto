@@ -32,3 +32,8 @@ export const buttonPopupAdd = document.querySelector('.button_type_add');
 export const popupAddForm = popupAdd.querySelector('.popup__form');
 export const popupAddTitle = popupAddForm.querySelector('.popup__input_type_title');
 export const popupAddLink = popupAddForm.querySelector('.popup__input_type_link');
+
+// popup "просмотр фото"
+export const popupImage = document.querySelector('.popup_type_open-image');
+export const popupImgText = popupImage.querySelector('.popup__image-title');
+export const popupImgPhoto = popupImage.querySelector('.popup__image');

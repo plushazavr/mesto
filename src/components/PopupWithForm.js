@@ -1,35 +1,31 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, callbackSubmit) {
+  constructor(popupSelector, {handleFormSubmit}) {
     super(popupSelector);
-    this._callbackSubmit = callbackSubmit;
+    this._handleFormSubmit = handleFormSubmit;
     this._popupForm = this._popup.querySelector('.popup__form');
     this._inputList = Array.from(
         this._popupForm.querySelectorAll('.popup__input')); 
   }
 
-  // Cобирает данные всех полей формы
   _getInputValues() {
-
     this._newValues = {};
-    this._inputList.forEach((inputElement) => {
-        this._newValues[inputElement.name] = inputElement.value;
+    this._inputList.forEach((input) => {
+        this._newValues[input.name] = input.value;
     })
     return this._newValues;
   }
 
-   // Добавляет обработчик клика иконке закрытия и обработчик сабмита формы.
   setEventListeners() {
-    super.setEventListeners();
     this._popupForm.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._callbackSubmit(this._getInputValues());
+        this._handleFormSubmit(this._getInputValues());
         this.close();
     });
+    super.setEventListeners();
   }
 
-  //  Сбрасывает форму при закрытии
   close() {
     super.close();
     this._popupForm.reset();

@@ -6,7 +6,6 @@ export default class PopupWithImage extends Popup {
     this._popupImageTitle = this._popup.querySelector('.popup__image-title');
   }
 
-  // Переопределяем родительский метод open из класса Popup
   open(values) {
     super.open();
     this._popupImage.src = values.link;

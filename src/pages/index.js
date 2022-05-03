@@ -46,11 +46,8 @@ const initialCardsList = new Section({
 }, '.cards');
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit', {
-  handleFormSubmit: () => {
-    userInfo.setUserInfo({
-      name: inputUser.value,
-      info: inputDescription.value
-    })
+  handleFormSubmit: (userData) => {
+    userInfo.setUserInfo(userData)
   }
 })
 
@@ -72,11 +69,8 @@ buttonPopupAdd.addEventListener('click', () => {
 });
 
 const popupAddCard = new PopupWithForm('.popup_type_add', {
-  handleFormSubmit: () => {
-    const newCard = createCard({
-      name: popupAddTitle.value,
-      link: popupAddLink.value
-    })
+  handleFormSubmit: (userData) => {
+    const newCard = createCard(userData)
     initialCardsList.addItem(newCard)
   }
 })

@@ -41,7 +41,7 @@ _setEventListeners() {
           this._handleCardClick({
               name: this._name,
               link: this._link,
-              alt: this._alt
+              //alt: this._alt
           })
   });
   

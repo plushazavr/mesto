@@ -26,3 +26,10 @@ export const popupAddLink = popupAddForm.querySelector('.popup__input_type_link'
 export const popupImage = document.querySelector('.popup_type_open-image');
 export const popupImgText = popupImage.querySelector('.popup__image-title');
 export const popupImgPhoto = popupImage.querySelector('.popup__image');
+
+export const popupAvatarEdit = document.querySelector('.popup_type_avatar');
+export const avatarForm = popupAvatarEdit.querySelector('.popup__form');
+export const popupAvatarSelector = '.popup_type_avatar';
+export const buttonAvatarEdit = document.querySelector('.button_type_avatar-edit');
+
+export const popupDeleteSelector = '.popup_type_delete';

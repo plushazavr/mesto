@@ -92,8 +92,9 @@ const createCard = (data) => {
           });
           deletePopup.open();
       },
+      
       handleLikeClick: () => {
-          cardElement.setLike();
+          cardElement.setLike() 
       }
   }, '.elements', api, userId);
   return cardElement.generateCard();

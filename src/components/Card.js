@@ -24,18 +24,23 @@ export default class Card {
   generateCard() {
     this._card = this._getTemplate();
     this._likeButton = this._card.querySelector('.button_type_like');
+    this._deleteButton = this._card.querySelector('.button_type_delete');
+    this._likeCounter = this._card.querySelector('.element__like-counter');
     this._image = this._card.querySelector('.element__image');
-    this._setEventListeners();
+    this._imageTitle = this._card.querySelector('.element__title');
+    
     this._image.src = this._link;
     this._image.alt = this._name;
-    this._card.querySelector('.element__title').textContent = this._name;
+    this._imageTitle.textContent = this._name;
 
+    this._likeCounter.textContent = this._likes.length;
     if (!(this._ownerId === this._userId)) {
-        this._card.querySelector('.button_type_delete').style.display = 'none';
+      this._deleteButton.style.display = 'none';
     }
     if (this._likes.find((obj) => this._userId === obj._id)) {
         this._likeButton.classList.add('button_type_like_active')
-    }    
+    }
+    this._setEventListeners();
     return this._card;
 }
 
@@ -45,21 +50,22 @@ export default class Card {
   
 
   setLike() {
-    const count = this._card.querySelector('.element__like-counter');
     if (!this._likeButton.classList.contains('button_type_like_active')) {
         this._api.likeCard(this._id)
-            .then((data) => {
+            .then(card => {
+                this._likes = card.likes;
                 this._likeButton.classList.add('button_type_like_active');
-                count.textContent = data.likes.length;
+                this._likeCounter.textContent = this._likes.length;
             })
             .catch((err) => {
                 console.log(err);
             })
     } else {
         this._api.dislikeCard(this._id)
-            .then((data) => {
+            .then(card => {
+                this._likes = card.likes;
                 this._likeButton.classList.remove('button_type_like_active');
-                count.textContent = data.likes.length;
+                this._likeCounter.textContent = this._likes.length;
             })
             .catch((err) => {
                 console.log(err);
@@ -76,12 +82,12 @@ export default class Card {
     })
   });
 
-  this._card.querySelector('.button_type_delete').addEventListener('click', () => {
+  this._deleteButton.addEventListener('click', () => {
       this._handleCardDelete();
   })
 
   this._likeButton.addEventListener('click', () => {
-      this._handleLikeClick();
+      this.setLike();
   });
   }
 }

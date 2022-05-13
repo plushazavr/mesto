@@ -24,9 +24,7 @@ import {
 } from '../utils/constants.js';
 
 let userId = null;
-const profileValid = new FormValidator(config, popupProfileEdit);
-const addCardValid = new FormValidator(config, popupAdd);
-const avatarValid = new FormValidator(config, avatarForm);
+
 const userInfo = new UserInfo({
   nameUser: '.profile__user',
   infoUser: '.profile__description',
@@ -54,12 +52,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     })
 
 const avatarEditPopup = new PopupWithForm(popupAvatarSelector, (values) => {
-    avatarEditPopup.showLoading(true);
+    avatarEditPopup.showLoading('Сохранение...');
     api.updateUserAvatar(values)
         .then((data) => {
             userInfo.setUserAvatar(data);
             avatarEditPopup.close();
-            avatarValid.resetValidation();
         })
         .catch((err) => {
             console.log(err);
@@ -77,7 +74,7 @@ const createCard = (data) => {
       },
       handleCardDelete: () => {
           deletePopup.setSubmitAction(() => {
-              deletePopup.showLoading(true);
+              deletePopup.showLoading('Удаление...');
               api.deleteCard(data._id)
                   .then(() => {
                       cardElement.deleteCard();
@@ -87,7 +84,7 @@ const createCard = (data) => {
                       console.log(err);
                   })
                   .finally(() => {
-                      deletePopup.showLoading(false);
+                      deletePopup.showLoading('Удалить');
                   })
           });
           deletePopup.open();
@@ -107,23 +104,22 @@ const initialCardsList = new Section({
 }, '.cards');
 
 const popupAddCard = new PopupWithForm('.popup_type_add', (values) => {
-  popupAddCard.showLoading(true);
+  popupAddCard.showLoading('Сохранение...');
   api.addUserCard(values)
       .then((data) => {
         initialCardsList.addItem(createCard(data));
           popupAddCard.close();
-          addCardValid.resetValidation();
       })
       .catch((error) => {
           console.error(error);
       })
       .finally(() => {
-          popupAddCard.showLoading(false);
+          popupAddCard.showLoading('Сохранить');
       })
 });
 
 const popupEditProfile = new PopupWithForm('.popup_type_edit', (userData) => {
-  popupEditProfile.showLoading(userData)
+  popupEditProfile.showLoading('Сохранение...')
   api.setUserInfo(userData)
       .then((data) => {
           userInfo.setUserInfo(data);
@@ -133,28 +129,37 @@ const popupEditProfile = new PopupWithForm('.popup_type_edit', (userData) => {
           console.error(error);
       })
       .finally(() => {
-          popupEditProfile.showLoading(false);
+          popupEditProfile.showLoading('Сохранить');
       })
 });
 
+const formValidators = {}
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+   validator.enableValidation();
+  });
+};
+enableValidation(config);
+
+
 buttonPopupAdd.addEventListener('click', () => {
-  addCardValid.resetValidation();
-  popupAddCard.showLoading(false);
-  popupAddCard.open();
+  formValidators.card.resetValidation();
+  popupAddCard.open();  
 });
 
 buttonProfileEdit.addEventListener('click', () => {
   const {name, info} = userInfo.getUserInfo();
-  popupEditProfile.showLoading(false);
-  //profileValid.resetValidation();
   inputUser.value = name;
   inputDescription.value = info;
   popupEditProfile.open();
 });
 
 buttonAvatarEdit.addEventListener('click', () => {
-  avatarValid.resetValidation();
-  avatarEditPopup.showLoading(false);
+  formValidators.avatar.resetValidation();
   avatarEditPopup.open();  
 });
 
@@ -163,7 +168,3 @@ popupEditProfile.setEventListeners();
 popupAddCard.setEventListeners();
 avatarEditPopup.setEventListeners();
 deletePopup.setEventListeners();
-
-profileValid.enableValidation();
-addCardValid.enableValidation();
-avatarValid.enableValidation();

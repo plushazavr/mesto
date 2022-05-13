@@ -52,7 +52,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     })
 
 const avatarEditPopup = new PopupWithForm(popupAvatarSelector, (values) => {
-    avatarEditPopup.showLoading('Сохранение...');
+    avatarEditPopup.showLoading(true);
     api.updateUserAvatar(values)
         .then((data) => {
             userInfo.setUserAvatar(data);
@@ -84,7 +84,7 @@ const createCard = (data) => {
                       console.log(err);
                   })
                   .finally(() => {
-                      deletePopup.showLoading('Удалить');
+                      deletePopup.showLoading(false);
                   })
           });
           deletePopup.open();
@@ -114,7 +114,7 @@ const popupAddCard = new PopupWithForm('.popup_type_add', (values) => {
           console.error(error);
       })
       .finally(() => {
-          popupAddCard.showLoading('Сохранить');
+          popupAddCard.showLoading(false);
       })
 });
 
@@ -129,7 +129,7 @@ const popupEditProfile = new PopupWithForm('.popup_type_edit', (userData) => {
           console.error(error);
       })
       .finally(() => {
-          popupEditProfile.showLoading('Сохранить');
+          popupEditProfile.showLoading(false);
       })
 });
 

@@ -38,6 +38,13 @@
 
     npm install
 
+>*далее работа над проектом*
+
+Сборка проекта:
+
+    npm run build
+
 Запуск [локального сервера](http://localhost:8080/):
 
     npm run dev
+

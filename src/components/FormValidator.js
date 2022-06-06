@@ -8,7 +8,6 @@ export default class FormValidator {
     this._inputErrorClass = data.inputErrorClass;
     this._formErrorClass = data.formErrorClass;
     this._errorClass = data.errorClass;
-    //this._popupForm = data.popupForm;
   }
   
   resetValidation() {
@@ -19,14 +18,7 @@ export default class FormValidator {
     
   }
 
-  /*_getErrorElement = (inputElement) => {
-    return inputElement
-      .closest(this._popupForm)
-      .querySelector(this._inputErrorClass)
-  }*/
-
   _showInputError = (inputElement, errorMessage) => {
-    //const errorElement = this._getErrorElement(inputElement);
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._formErrorClass);
     errorElement.textContent = errorMessage;
@@ -34,7 +26,6 @@ export default class FormValidator {
   }
 
   _hideInputError = (inputElement) => {
-    //const errorElement = this._getErrorElement(inputElement);
     const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._formErrorClass);
     errorElement.classList.remove(this._errorClass);

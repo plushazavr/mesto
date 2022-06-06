@@ -8,14 +8,6 @@ export default class PopupWithConfirmation extends Popup {
         this._buttonText = this._popupButton.textContent;
     }
 
-    /*showLoading(isLoading) {
-        if (isLoading) {
-            this._popupButton.textContent = 'Сохранение...';
-        } else {
-            this._popupButton.textContent = this._buttonText;
-        }
-    }*/
-
     showLoading(text) {
       this._popupButton.value = text;
     }

@@ -24,3 +24,20 @@
 * Открытие и закрытие popup по клику на крестик и overlay
 * Добавление и удаление собственных карточек
 * Функция like/dislike, счетчки like
+
+------
+
+### Установка
+>Для начала работы с проектом вам необходимы: [NodeJS & npm](https://nodejs.org/en/) и [Git Bash](https://gitforwindows.org/) (для работы с Windows ОС)
+
+Склонировать проект на ПК:
+
+    gh repo clone plushazavr/mesto
+
+Установить зависимости:
+
+    npm install
+
+Запуск [локального сервера](http://localhost:8080/):
+
+    npm run dev
